@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Setup and Tutorial for VLA Interpretability experiments and Action Atlas.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setup & Tutorial | VLA Interpretability</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦾</text></svg>">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html" style="font-weight: 700; font-size: 1.1rem;">
+        VLA Interp
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="mainNavbar" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="index.html#abstract">Abstract</a>
+        <a class="navbar-item" href="index.html#findings">Key Findings</a>
+        <a class="navbar-item" href="index.html#results">Results</a>
+        <a class="navbar-item" href="index.html#models">Models</a>
+        <a class="navbar-item" href="index.html#action-atlas">Action Atlas</a>
+        <a class="navbar-item" href="tutorial.html" style="color: var(--accent-light) !important;">Setup &amp; Tutorial</a>
+      </div>
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://action-atlas.com" target="_blank" style="color: var(--accent-light) !important;">
+          <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+          <span>Live Demo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<section class="hero is-medium hero-gradient" style="padding-top: 52px;">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-2 publication-title">Setup &amp; Tutorial</h1>
+      <h2 class="subtitle is-5" style="color: rgba(255,255,255,0.8); font-weight: 400;">
+        Get started with VLA interpretability experiments and Action Atlas
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TABS ===== -->
+<section class="section" style="padding-top: 2rem;">
+  <div class="container is-max-desktop">
+
+    <div class="tabs-container" style="text-align: center;">
+      <button class="tab-btn active" onclick="switchTab('quickstart')">Quick Start</button>
+      <button class="tab-btn" onclick="switchTab('pi05')">Pi0.5 Setup</button>
+      <button class="tab-btn" onclick="switchTab('openvla')">OpenVLA-OFT Setup</button>
+      <button class="tab-btn" onclick="switchTab('atlas-tutorial')">Action Atlas</button>
+    </div>
+
+    <!-- ==================== QUICK START ==================== -->
+    <div id="tab-quickstart" class="tab-content active">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Clone the Repository</h4>
+          <p>Clone with submodules to include LIBERO benchmark and LeRobot dependencies.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">git clone</span> <span class="flag">--recursive</span> <span class="string">https://github.com/CWRU-AISM/vla_interp.git</span>
+<span class="command">cd</span> vla_interp
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Create Environment</h4>
+          <p>Set up a conda environment with Python 3.12 and install PyTorch with CUDA support.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">conda create</span> <span class="flag">-y -n</span> pi05 python=3.12
+<span class="command">conda activate</span> pi05
+<span class="command">pip install</span> torch torchvision <span class="flag">--index-url</span> <span class="string">https://download.pytorch.org/whl/cu128</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Install Dependencies</h4>
+          <p>Install LeRobot (for Pi0.5 support) and the project package.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">cd</span> lerobot && <span class="command">pip install</span> <span class="flag">-e</span> <span class="string">".[pi]"</span> && <span class="command">cd</span> ..
+<span class="command">pip install</span> <span class="flag">-e</span> .
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Download Model Checkpoint</h4>
+          <p>Download the Pi0.5 fine-tuned checkpoint from HuggingFace.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">huggingface-cli download</span> lerobot/pi05_libero_finetuned \
+    <span class="flag">--local-dir</span> checkpoints/pi05_libero_finetuned
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Verify Installation</h4>
+          <p>Run a quick check to make sure everything is configured correctly.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">python</span> <span class="flag">-c</span> <span class="string">"from lerobot.policies.pi05.modeling_pi05 import PI05Policy; print('OK')"</span>
+          </div>
+          <div class="info-box tip">
+            <div class="info-box-icon">&#9989;</div>
+            <div>
+              <strong>Requirements:</strong> NVIDIA GPU with 24GB+ VRAM, CUDA 12.x, Python 3.12, HuggingFace account with PaliGemma access.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PI0.5 SETUP ==================== -->
+    <div id="tab-pi05" class="tab-content">
+      <h3 class="title is-5" style="color: var(--primary);">Pi0.5 Experiment Pipeline</h3>
+      <p style="color: var(--text-mid); margin-bottom: 1.5rem;">
+        Run the full mechanistic interpretability pipeline on Pi0.5 (3B, dual-pathway, flow matching).
+      </p>
+
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Train Per-Token SAEs</h4>
+          <p>Train TopK SAEs (k=64, 8x expansion) on action expert residual stream activations.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="comment"># Train SAE on layer 17 of the action expert (1024 -> 8192)</span>
+<span class="command">python</span> experiments/train_pertoken_sae.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layer</span> action_expert_layer_17 <span class="flag">--expansion</span> 8
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-icon">&#9888;&#65039;</div>
+            <div>
+              <strong>Critical:</strong> Always use per-token SAEs. Mean-pooled SAEs cause 88% task failure despite high reconstruction quality.
+              Always set <code>TORCH_COMPILE_DISABLE=1</code> for experiment scripts.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Contrastive Concept Identification</h4>
+          <p>Identify task-specific features using Cohen's d effect size scoring.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">python</span> experiments/pi05_contrastive_concept_id.py \
+    <span class="flag">--suite</span> goal <span class="flag">--pathway</span> expert <span class="flag">--layers</span> 0-17
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Concept Ablation &amp; Steering</h4>
+          <p>Zero-ablate or steer specific SAE features during live rollouts to establish causality.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="comment"># Zero-ablation</span>
+<span class="command">python</span> experiments/run_pi05_concept_ablation.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layer</span> 8 <span class="flag">--concept</span> butter <span class="flag">--multiplier</span> 0
+
+<span class="comment"># Feature steering (suppress at -3x)</span>
+<span class="command">python</span> experiments/run_pi05_concept_ablation.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layer</span> 8 <span class="flag">--concept</span> butter <span class="flag">--multiplier</span> -3
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Linear Probing &amp; Activation Injection</h4>
+          <p>Validate causality with probes and test activation transfer across conditions.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="comment"># Multi-layer probing</span>
+<span class="command">python</span> experiments/pi05_action_probes_rss.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layers</span> 0-17
+
+<span class="comment"># Pathway comparison (Expert vs PaliGemma)</span>
+<span class="command">python</span> experiments/pathway_comparison.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layers</span> 0-17
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== OPENVLA-OFT SETUP ==================== -->
+    <div id="tab-openvla" class="tab-content">
+      <h3 class="title is-5" style="color: var(--primary);">OpenVLA-OFT Setup</h3>
+      <p style="color: var(--text-mid); margin-bottom: 1.5rem;">
+        Additional setup for OpenVLA-OFT (7B, LLaMA-2 backbone, L1 regression action head).
+      </p>
+
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Install OpenVLA Dependencies</h4>
+          <p>Install the prismatic-vlms and openvla packages alongside the base environment.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="comment"># See setup/SETUP.md for full instructions</span>
+<span class="command">pip install</span> <span class="flag">-e</span> openvla/
+<span class="command">pip install</span> <span class="flag">-e</span> prismatic_stub/
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Train OFT SAEs</h4>
+          <p>Train SAEs on all 32 LLaMA-2 layers. Note: apply SAEs to action tokens only (last 7 of 605 total tokens).</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="comment"># Per-token SAE (4096 -> 32768, TopK k=64)</span>
+<span class="command">python</span> experiments/openvla/train_sae.py \
+    <span class="flag">--suite</span> goal <span class="flag">--layer</span> 16 <span class="flag">--expansion</span> 4
+          </div>
+          <div class="info-box note">
+            <div class="info-box-icon">&#8505;&#65039;</div>
+            <div>
+              <strong>Key insight:</strong> SAEs on ALL 605 tokens = 0% success. SAEs on action tokens only (last 7) = 99.2% success. The SAE disrupts vision/language tokens that the model depends on.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>OFT Concept Ablation</h4>
+          <p>Run ablation experiments across all 4 LIBERO suites.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">python</span> experiments/openvla/run_oft_concept_ablation.py \
+    <span class="flag">--suite</span> goal <span class="flag">--concept</span> put <span class="flag">--multiplier</span> 0
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ACTION ATLAS TUTORIAL ==================== -->
+    <div id="tab-atlas-tutorial" class="tab-content">
+      <h3 class="title is-5" style="color: var(--primary);">Running Action Atlas Locally</h3>
+      <p style="color: var(--text-mid); margin-bottom: 1.5rem;">
+        Action Atlas is deployed at <a href="https://action-atlas.com" target="_blank">action-atlas.com</a>, but you can also run it locally with full data access.
+      </p>
+
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Start the Backend</h4>
+          <p>The Flask backend serves API endpoints and data from local storage.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">python</span> vla_conceptviz/run_backend.py <span class="flag">--host</span> 0.0.0.0 <span class="flag">--port</span> 6006
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Start the Frontend</h4>
+          <p>The Next.js frontend provides the interactive visualization interface.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">cd</span> vla_conceptviz/frontend
+<span class="command">npm install</span>
+<span class="comment"># For local dev, set API URL:</span>
+<span class="command">echo</span> <span class="string">"NEXT_PUBLIC_API_URL=http://localhost:6006"</span> > .env.local
+<span class="command">npm run</span> dev
+          </div>
+          <p style="margin-top: 0.75rem; color: var(--text-mid);">
+            Visit <strong>http://localhost:3002</strong> to access Action Atlas locally.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Or Use Docker</h4>
+          <p>Run both backend and frontend in a single container.</p>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+<span class="command">docker compose build</span> && <span class="command">docker compose up</span> <span class="flag">-d</span>
+<span class="comment"># Visit http://localhost:3000</span>
+          </div>
+          <div class="info-box tip">
+            <div class="info-box-icon">&#128161;</div>
+            <div>
+              <strong>Tip:</strong> Docker mounts local video directories for full data access. The Fly.io deployment uses Tigris S3 for video storage (48,537+ files).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="title is-5" style="margin-top: 2.5rem; color: var(--primary);">Exploring the Platform</h3>
+
+      <div class="columns is-multiline" style="margin-top: 1rem;">
+        <div class="column is-half">
+          <div class="content-card">
+            <h5 style="color: var(--primary); font-weight: 700;"><i class="fas fa-search" style="color: var(--accent); margin-right: 8px;"></i>Feature Explorer</h5>
+            <p style="color: var(--text-mid); font-size: 0.9rem;">Browse UMAP scatter plots of SAE features, search by semantic query, and inspect individual feature activations across layers and suites.</p>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="content-card">
+            <h5 style="color: var(--primary); font-weight: 700;"><i class="fas fa-play-circle" style="color: var(--accent); margin-right: 8px;"></i>Video Library</h5>
+            <p style="color: var(--text-mid); font-size: 0.9rem;">Filter through 49,000+ rollout videos by model (Pi0.5 / OFT), experiment type, suite, and success/failure outcome.</p>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="content-card">
+            <h5 style="color: var(--primary); font-weight: 700;"><i class="fas fa-flask" style="color: var(--accent); margin-right: 8px;"></i>Ablation Studies</h5>
+            <p style="color: var(--text-mid); font-size: 0.9rem;">Compare baseline vs. ablated behavior side-by-side, view success rate deltas per concept, and explore layer-phase ablation matrices.</p>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="content-card">
+            <h5 style="color: var(--primary); font-weight: 700;"><i class="fas fa-shield-alt" style="color: var(--accent); margin-right: 8px;"></i>Perturbation Testing</h5>
+            <p style="color: var(--text-mid); font-size: 0.9rem;">Test model robustness to vision perturbations (flip, blur, noise, crop) with real experiment data from 5,691 episodes across Pi0.5 and OFT.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer-custom">
+  <div class="container is-max-desktop">
+    <div class="columns">
+      <div class="column is-half">
+        <p style="font-weight: 600; color: white; margin-bottom: 0.5rem;">Not All Features Are Created Equal</p>
+        <p style="font-size: 0.9rem;">Case Western Reserve University</p>
+      </div>
+      <div class="column is-half has-text-right">
+        <p style="margin-bottom: 0.5rem;">
+          <a href="index.html" style="margin-right: 1rem;">Home</a>
+          <a href="https://action-atlas.com" target="_blank" style="margin-right: 1rem;">Action Atlas</a>
+          <a href="https://github.com/CWRU-AISM/vla_interp" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script defer src="./static/js/fontawesome.all.min.js"></script>
+<script>
+  // Navbar burger toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    if ($navbarBurgers.length > 0) {
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });
+
+  // Tab switching
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.getElementById('tab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
