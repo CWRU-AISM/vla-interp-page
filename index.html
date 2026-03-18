@@ -125,16 +125,16 @@
           <!-- Links -->
           <div class="publication-links">
             <span class="link-block">
-              <a href="https://arxiv.org/abs/XXXX.XXXXX" class="external-link button is-normal is-rounded is-dark">
+              <a href="./static/paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon"><i class="fas fa-file-pdf"></i></span>
                 <span>Paper</span>
               </a>
             </span>
             <span class="link-block">
-              <a href="https://arxiv.org/abs/XXXX.XXXXX" class="external-link button is-normal is-rounded is-dark">
+              <span class="external-link button is-normal is-rounded" style="opacity: 0.5; cursor: default; pointer-events: none; background-color: #888; color: #ccc; border-color: #888;">
                 <span class="icon"><i class="ai ai-arxiv"></i></span>
-                <span>arXiv</span>
-              </a>
+                <span>arXiv</span> <span class="coming-soon" style="margin-left: 8px;">Soon</span>
+              </span>
             </span>
             <span class="link-block">
               <a href="https://github.com/CWRU-AISM/vla_interp" class="external-link button is-normal is-rounded is-dark">
@@ -406,7 +406,7 @@
         <div class="figure-container">
           <img src="./static/images/qualitative_put.png" alt="PUT concept ablation">
           <p class="figure-caption">
-            PUT concept ablation (L8): &ldquo;Put the cream cheese in the bowl.&rdquo; Top: baseline completes pick-and-place (91 steps). Bottom: with PUT features zeroed, the robot fails to execute the placement, timing out at 300 steps.
+            PUT concept ablation (L8): &ldquo;Put the cream cheese in the bowl.&rdquo; Top: baseline picks up cream cheese and places it in the bowl (91 steps). Bottom: with PUT features zeroed, the robot drops the cream cheese into the bowl, knocking it over (300 steps, task failure).
           </p>
         </div>
       </div>
@@ -545,7 +545,7 @@
       <tbody>
         <tr>
           <td><strong>Pi0.5</strong></td>
-          <td>31,600+</td>
+          <td>65,000+</td>
           <td>36</td>
           <td>43</td>
           <td>LIBERO</td>
@@ -566,15 +566,15 @@
         </tr>
         <tr>
           <td><strong>SmolVLA</strong></td>
-          <td>37,100+</td>
-          <td>128</td>
+          <td>42,000+</td>
+          <td>192</td>
           <td>45</td>
           <td>LIBERO, MetaWorld</td>
         </tr>
         <tr>
           <td><strong>GR00T N1.5</strong></td>
           <td>164,700+</td>
-          <td>96</td>
+          <td>68</td>
           <td>36</td>
           <td>LIBERO</td>
         </tr>
