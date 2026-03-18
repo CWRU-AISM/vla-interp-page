@@ -33,12 +33,12 @@
     <div id="mainNavbar" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" href="#abstract">Abstract</a>
-        <a class="navbar-item" href="#findings">Key Findings</a>
         <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#findings">Key Findings</a>
         <a class="navbar-item" href="#results">Results</a>
         <a class="navbar-item" href="#models">Models</a>
         <a class="navbar-item" href="#action-atlas">Action Atlas</a>
-        <a class="navbar-item" href="tutorial.html">Setup &amp; Tutorial</a>
+        <span class="navbar-item" style="color: rgba(255,255,255,0.35) !important; cursor: default;">Setup &amp; Tutorial</span>
       </div>
       <div class="navbar-end">
         <a class="navbar-item" href="https://action-atlas.com" target="_blank" style="color: var(--accent-light) !important;">
@@ -110,7 +110,7 @@
             <span class="author-block" style="color: rgba(255,255,255,0.9);">
               <a href="https://xijiazhao.github.io/">Xijia Zhao</a><sup>1,*</sup>
             </span>
-            and
+            <span style="color: rgba(255,255,255,0.9);">and</span>
             <span class="author-block" style="color: rgba(255,255,255,0.9);">
               <a href="https://scholar.google.com/citations?user=4CbVWDcAAAAJ&hl=en">Peng Wang</a><sup>2</sup>
             </span>
@@ -161,15 +161,15 @@
   <div class="container is-max-desktop">
     <div class="stats-bar">
       <div class="stat-item">
-        <div class="stat-number">6</div>
+        <div class="stat-number">5</div>
         <div class="stat-label">VLA Models</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">351,000+</div>
+        <div class="stat-number">394,000+</div>
         <div class="stat-label">Rollout Episodes</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">388</div>
+        <div class="stat-number">424</div>
         <div class="stat-label">SAE Checkpoints</div>
       </div>
       <div class="stat-item">
@@ -192,108 +192,8 @@
         <h2 class="title is-3 section-title has-text-centered">Abstract</h2>
         <div class="content has-text-justified" style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-mid);">
           <p>
-            VLA models combine vision, language, and motor control in one architecture&mdash;but nobody really knows what's going on inside them. We present the <strong>first large-scale mechanistic interpretability study of VLAs</strong>, covering six models from 80M to 7B parameters: Pi0.5 (3B, flow-matching), OpenVLA-OFT (7B, continuous regression), X-VLA (1B, soft-prompted flow-matching), SmolVLA (450M, interleaved VLM-expert), GR00T N1.5 (3B, DiT-Eagle hybrid), and ACT (80M, CVAE). Using activation injection, counterfactual prompting, sparse autoencoders, and linear probes across <strong>351,000+ rollout episodes</strong> on four benchmarks (LIBERO, MetaWorld, SimplerEnv, ALOHA), we find five things that hold across architectures.
+            Vision-Language-Action (VLA) models combine perception, language, and motor control in a single architecture, yet how they translate multimodal inputs into actions remains poorly understood. We apply activation injection, sparse autoencoders (SAEs), and linear probes to <strong>six models spanning 80M-7B parameters</strong> across <strong>394,000+ rollout episodes</strong> on four benchmarks. The visual pathway dominates action generation across all architectures: injecting baseline activations into null-prompt episodes recovers near-identical behavior, while cross-task injection steers robots toward source-task positions (99.8% of X-VLA episodes align with the source trajectory), exposing spatially bound motor programs tied to scene coordinates. <strong>Language sensitivity depends on task structure, not model design</strong>: when visual context uniquely specifies the task, language is ignored; when multiple goals share a scene, language becomes essential (X-VLA <code>libero_goal</code>: 94%&rarr;10% under wrong prompts vs. <code>libero_object</code>: 60-100% regardless). In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways encode motor programs while VLM pathways encode goal semantics (2&times; greater behavioral displacement from expert injection), and subspace injection confirms these occupy separable activation subspaces. Per-token SAE processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a> for interactive exploration of VLA representations across all six models.
           </p>
-          <p>
-            <strong>Visual pathway activations determine behavior</strong> across all six models (cosine similarity = 0.999). Fine-tuned VLAs ignore language&mdash;null and negated prompts produce identical behavior despite 99.3% internal prompt decodability. Cross-task injection fails universally (0&ndash;2% across 3,600+ pairs), but <strong>displacement analysis shows the robot actually executes the source task's motor program</strong> in the wrong scene (99.8% source-dominant in X-VLA). In multi-pathway architectures, expert pathways cause 2&times; more behavioral displacement than VLM pathways. Per-token SAE processing matters, and narrow architectures (1024-dim) have catastrophic kill-switch features while wider ones (4096-dim) spread information redundantly. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive platform for exploring VLA concept representations across all six models with 388 trained SAEs and 82+ identified manipulation concepts.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TEASER FIGURE ===== -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="figure-container">
-      <img src="./static/images/fig1_core_findings.png" alt="Core findings: activation injection, per-token SAEs, and steering results">
-      <p class="figure-caption">
-        <strong>Figure 1: Core Findings.</strong> (A) Injecting PaliGemma activations from a baseline episode into a null-prompt episode recovers near-identical actions (cos = 0.999)&mdash;vision drives behavior, not language. (B) Per-token SAEs maintain 94% task success while mean-pooled SAEs cause 88% failure. (C) Same-scene steering improves performance by +23-26pp, while cross-task transfer fails (0-2%).
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== KEY FINDINGS ===== -->
-<section class="section section-alt" id="findings">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title has-text-centered">Key Findings</h2>
-    <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
-      What we found by looking inside six VLA architectures
-    </p>
-
-    <div class="columns is-multiline">
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">1</div>
-          <h4>Visual Pathway Dominates</h4>
-          <p>The visual pathway drives behavior across all six architectures. Inject baseline activations into a null-prompt episode and the robot does the same thing.</p>
-          <span class="evidence">cos = 0.999, all 6 models</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">2</div>
-          <h4>Layer 0 Is Sufficient</h4>
-          <p>Task identity lives in the first transformer layer. Injecting just Layer 0 recovers 73% of task performance.</p>
-          <span class="evidence">L0: 73% recovery</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">3</div>
-          <h4>Same-Scene Steering Works</h4>
-          <p>Activation injection overrides language prompts with 93% success, improving task performance by +23-26 percentage points.</p>
-          <span class="evidence">93% override rate</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">4</div>
-          <h4>Cross-Task Transfer Fails</h4>
-          <p>Transfer fails across all six models (0-2%), but the robot is actually running the source task's motor program in the wrong scene. Displacement analysis shows 99.8% source-dominant trajectories in X-VLA.</p>
-          <span class="evidence">0-2% across 3,600+ pairs, 6 models</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">5</div>
-          <h4>Language Is Ignored</h4>
-          <p>Fine-tuned VLAs ignore what you tell them. Null, negated, and contradictory prompts all produce the same behavior&mdash;even though the model internally distinguishes prompts with 99.3% accuracy.</p>
-          <span class="evidence">p = 0.25 (Pi0.5); confirmed on SmolVLA, X-VLA</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">6</div>
-          <h4>Per-Token SAEs Essential</h4>
-          <p>Per-token processing is needed for most architectures, but the picture is more complex than expected: X-VLA mean-pooled SAEs actually achieve better rollout fidelity than per-token.</p>
-          <span class="evidence">388 SAEs across 6 models</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">7</div>
-          <h4>Width Determines Fragility</h4>
-          <p>Narrow models (1024-dim Pi0.5) blow up when you ablate features. Wide models (4096-dim OFT) degrade gracefully because information is spread across more features.</p>
-          <span class="evidence">1024: fragile, 4096: resilient</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card">
-          <div class="finding-number">8</div>
-          <h4>Cross-Suite SAE Generalization</h4>
-          <p>A single SAE trained on mixed data works across all four LIBERO benchmark suites and four different fine-tuned OFT model variants.</p>
-          <span class="evidence">99.2% (119/120)</span>
-        </div>
-      </div>
-      <div class="column is-one-third">
-        <div class="finding-card" style="border-left-color: var(--accent-warm);">
-          <div class="finding-number" style="background: var(--gradient-warm);">9</div>
-          <h4>Temporal Early Commitment</h4>
-          <p>Robots commit to their trajectory early on. Ablating step 0 alone causes a -49% drop, while messing with later steps barely matters (-1%).</p>
-          <span class="evidence" style="background: rgba(230,126,34,0.08); color: var(--accent-warm);">Step 0: -49%</span>
         </div>
       </div>
     </div>
@@ -308,11 +208,11 @@
       Per-token Sparse Autoencoders + causal interventions for VLA mechanistic interpretability
     </p>
 
-    <!-- Architecture Figure -->
+    <!-- Methodology Figure -->
     <div class="figure-container" style="margin-bottom: 2rem;">
-      <img src="./static/images/fig7_spider_comparison.png" alt="VLA architecture comparison">
+      <img src="./static/images/fig_system_arch.png" alt="Methodology overview">
       <p class="figure-caption">
-        <strong>Figure 2: Architecture Comparison.</strong> Spider diagram comparing properties across architectures. In dual-pathway (Pi0.5, SmolVLA) and triple-pathway (GR00T) models, VLM components encode WHAT while expert components encode HOW, with expert pathways causing 2&times; more behavioral displacement.
+        Methodology overview. Top: activations are recorded from VLA backbone and action expert layers during rollout episodes, then replayed under counterfactual conditions (null prompts, cross-task scenes) to establish causal relationships via behavioral change. Middle: per-token SAEs decompose layer activations into sparse features. Bottom: features are clustered, searched, and causally validated through ablation and steering experiments, with results visualized in Action Atlas.
       </p>
     </div>
 
@@ -324,7 +224,7 @@
             Sparse Autoencoders (SAEs)
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We train <strong>388 TopK SAEs</strong> (k=64) across all six models with 4&ndash;8x expansion: 1024&rarr;8192 (Pi0.5 expert, X-VLA), 4096&rarr;32768 (OFT), 960&rarr;4096/480&rarr;4096 (SmolVLA VLM/expert), and 1536&ndash;2048&rarr;12288&ndash;16384 (GR00T DiT/Eagle/VL-SA). Each action token is processed independently to preserve the temporal structure needed for motor control. How pooling strategy affects rollout fidelity depends on the architecture&mdash;mean-pooling helps some models and hurts others.
+            We train <strong>424+ TopK SAEs</strong> (k=64) across all six models with 4-8x expansion: 1024&rarr;8192 (Pi0.5 expert, X-VLA), 4096&rarr;32768 (OFT), 960&rarr;4096/480&rarr;4096 (SmolVLA VLM/expert), and 1536-2048&rarr;12288-16384 (GR00T DiT/Eagle/VL-SA). Each action token is processed independently to preserve temporal structure for motor control. Pooling strategy effects on rollout fidelity are architecture-dependent.
           </p>
           <p style="color: var(--text-mid); line-height: 1.7; margin-top: 0.75rem;">
             Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> using Cohen's d effect size between concept-present and concept-absent episodes, multiplied by activation frequency.
@@ -347,14 +247,6 @@
       </div>
     </div>
 
-    <!-- SAE EV Figure -->
-    <div class="figure-container" style="margin-top: 2rem;">
-      <img src="./static/images/fig2_sae_ev.png" alt="SAE explained variance across layers">
-      <p class="figure-caption">
-        <strong>Figure 3: SAE Explained Variance.</strong> Layer-wise analysis of SAE reconstruction quality across all 18 layers for both Expert and PaliGemma pathways, with concept density heatmaps showing how different concepts distribute across the network depth.
-      </p>
-    </div>
-
     <div class="columns" style="margin-top: 2rem;">
       <div class="column is-half">
         <div class="content-card" style="height: 100%;">
@@ -363,7 +255,7 @@
             Linear Probes
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            Ridge regression probes hit 97-98% R&#178; across all action dimensions. We validate this with a <strong>projection operator test</strong>: projecting out the probe direction drops R&#178; to 0%, confirming those directions actually matter for action prediction.
+            Ridge regression probes achieve 97-98% R&#178; across all action dimensions. A <strong>projection operator test</strong> confirms causality: projecting out the probe direction drops R&#178; to 0%.
           </p>
         </div>
       </div>
@@ -374,8 +266,52 @@
             Counterfactual Prompting
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We test language grounding with <strong>6 prompt variations</strong> across Pi0.5 (3,396+ episodes, ANOVA p = 0.25), SmolVLA (MetaWorld, 4 difficulty levels), and X-VLA (LIBERO + SimplerEnv): baseline, null (empty string), negation ("don't move"), motor commands, object swap, and temporal switches. The models mostly ignore language, though SmolVLA shows some sensitivity on harder tasks.
+            We test language grounding with <strong>6 prompt variations</strong> across Pi0.5 (3,396+ episodes, ANOVA p = 0.25), SmolVLA (MetaWorld, 4 difficulty levels), and X-VLA (LIBERO + SimplerEnv): baseline, null (empty string), negation, motor commands, object swap, and temporal switches.
           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY FINDINGS ===== -->
+<section class="section" id="findings">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title has-text-centered">Key Findings</h2>
+    <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
+      Four findings that hold across five VLA architectures
+    </p>
+
+    <div class="findings-list">
+      <div class="finding-item">
+        <div class="finding-marker">1</div>
+        <div>
+          <h4>Visual Pathway Dominates Action Generation</h4>
+          <p>Injecting baseline visual activations into null-prompt episodes recovers near-identical behavior (cos&nbsp;=&nbsp;0.999). Cross-task injection steers robots toward source-task positions: 99.8% of X-VLA episodes align with the source trajectory, exposing spatially bound motor programs tied to scene coordinates.</p>
+        </div>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-marker">2</div>
+        <div>
+          <h4>Language Sensitivity Depends on Task Structure</h4>
+          <p>When visual context uniquely specifies the task, language is ignored. When multiple goals share a scene, language becomes essential: X-VLA <code>libero_goal</code> drops from 94% to 10% under wrong prompts, while <code>libero_object</code> maintains 60-100% regardless of prompt.</p>
+        </div>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-marker">3</div>
+        <div>
+          <h4>Expert Pathways Encode Motor Programs</h4>
+          <p>In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways cause 2&times; greater behavioral displacement than VLM pathways. Subspace injection confirms these occupy separable activation subspaces: expert for HOW, VLM for WHAT.</p>
+        </div>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-marker">4</div>
+        <div>
+          <h4>Per-Token SAE Processing Is Architecture-Dependent</h4>
+          <p>Per-token processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width.</p>
         </div>
       </div>
     </div>
@@ -390,91 +326,98 @@
     <div class="columns" style="margin-top: 2rem;">
       <div class="column is-half">
         <div class="figure-container">
-          <img src="./static/images/fig3_temporal.png" alt="Temporal ablation results">
+          <img src="./static/images/fig_cross_task_displacement.png" alt="Cross-task displacement override rates">
           <p class="figure-caption">
-            <strong>Figure 4: Temporal Criticality.</strong> (A) Feature ablation by episode phase: early steps matter most (-49% at step 0), late phases are fine (-1%). (B) Linear probes hit 97-98% R&#178; while SAE ablation shows only 2% effect due to redundancy.
+            Cross-task displacement override rates. Left: override rate across five models. Pi0.5 (99.6%) and X-VLA (99.8%) show near-complete source behavior transfer; OFT 77.9%; GR00T 57.0% (suite-dependent). Right: SmolVLA pathway displacement (15.8% expert vs. 9.0% VLM).
           </p>
         </div>
       </div>
       <div class="column is-half">
         <div class="figure-container">
-          <img src="./static/images/fig4_goldilocks.png" alt="Goldilocks effect">
+          <img src="./static/images/fig5_language.png" alt="Language ignored despite internal distinction">
           <p class="figure-caption">
-            <strong>Figure 5: The Goldilocks Effect.</strong> Unlike LLMs where you can smoothly dial features up or down, VLAs are all-or-nothing: any deviation from natural activation levels (boosting or dampening) causes failure. These are precise motor control signals, not soft preferences.
+            Language is ignored despite internal distinction. Left: counterfactual prompting across 3,396+ episodes shows no significant behavioral difference (p&gt;0.24). Right: layer 17 classifiers distinguish prompts with 99.3% accuracy, yet behavior is unchanged.
           </p>
         </div>
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column is-half">
-        <div class="figure-container">
-          <img src="./static/images/fig5_language.png" alt="Language is ignored">
-          <p class="figure-caption">
-            <strong>Figure 6: Language Is Ignored.</strong> (A) Success rates don't change across 6 prompt types on Pi0.5 (ANOVA p = 0.25); same pattern on SmolVLA and X-VLA. (B) The weird part: Layer 17 classifiers distinguish prompt types with 99.3% accuracy, but the model's behavior doesn't change.
-          </p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <div class="figure-container">
-          <img src="./static/images/fig6_probes.png" alt="Linear probes">
-          <p class="figure-caption">
-            <strong>Figure 7: Linear Probes vs SAE Ablation.</strong> Per-dimension R&#178; values and causality validation. Linear probes find the exact subspace used for action generation; SAE ablation is limited by feature redundancy.
-          </p>
-        </div>
-      </div>
+    <div class="figure-container" style="margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <img src="./static/images/fig_concept_ablation_cross_model.png" alt="Concept ablation causal sensitivity">
+      <p class="figure-caption has-text-centered">
+        Concept ablation causal sensitivity across five models. SmolVLA (480-dim expert) is the most sensitive at 28% zero-effect rate; OFT (4096-dim) and X-VLA (1024-dim) are the most resilient at 92% and 82%. Causal sensitivity does not follow representation width.
+      </p>
     </div>
 
     <!-- Width table -->
-    <h3 class="title is-5" style="margin-top: 2rem; color: var(--primary);">Width Determines Ablation Resilience</h3>
+    <h3 class="title is-5" style="margin-top: 2rem; color: var(--primary);">Causal sensitivity does not follow representation width</h3>
     <table class="results-table">
       <thead>
         <tr>
           <th>Model</th>
           <th>Hidden Dim</th>
-          <th>30-Feature Ablation</th>
-          <th>Tasks Affected</th>
-          <th>Interpretation</th>
+          <th>Zero-Effect Rate</th>
+          <th>Destruction Rate</th>
+          <th>Profile</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td><strong>SmolVLA Expert</strong></td>
+          <td>480</td>
+          <td>28%</td>
+          <td>6.3%</td>
+          <td>Narrow, most sensitive</td>
+        </tr>
+        <tr>
           <td><strong>Pi0.5 Expert</strong></td>
           <td>1024</td>
-          <td>Catastrophic (-60 to -100pp)</td>
-          <td>8-10 / 10</td>
-          <td>Narrow = concentrated = fragile</td>
-        </tr>
-        <tr>
-          <td><strong>X-VLA</strong></td>
-          <td>1024</td>
-          <td>Similar narrow profile</td>
-          <td>All layers critical</td>
-          <td>Narrow = concentrated = fragile</td>
-        </tr>
-        <tr>
-          <td><strong>OpenVLA-OFT</strong></td>
-          <td>4096</td>
-          <td>Sparse / zero (0pp to -33pp)</td>
-          <td>0-3 / 10</td>
-          <td>Wide = redundant = resilient</td>
+          <td>54%</td>
+          <td>14%</td>
+          <td>Bimodal, kill-switches at L8</td>
         </tr>
         <tr>
           <td><strong>GR00T N1.5</strong></td>
           <td>1536-2048</td>
-          <td>Universal features devastate DiT layers</td>
-          <td>Layer-type dependent</td>
-          <td>Mixed = pathway-specialized</td>
+          <td>59%</td>
+          <td>9.1%</td>
+          <td>Pathway-dependent (DiT > Eagle)</td>
+        </tr>
+        <tr>
+          <td><strong>X-VLA</strong></td>
+          <td>1024</td>
+          <td>82%</td>
+          <td>2.7%</td>
+          <td>Resilient despite narrow width</td>
+        </tr>
+        <tr>
+          <td><strong>OpenVLA-OFT</strong></td>
+          <td>4096</td>
+          <td>92%</td>
+          <td>0.5%</td>
+          <td>Wide, most resilient</td>
         </tr>
       </tbody>
     </table>
 
     <!-- Qualitative results -->
-    <div class="figure-container" style="margin-top: 2rem;">
-      <img src="./static/images/qualitative_grid_enhanced.png" alt="Qualitative concept ablation results">
-      <p class="figure-caption">
-        <strong>Qualitative Results.</strong> Ablating specific SAE features kills specific behaviors. Each row shows baseline (works) vs. ablated (fails) for concepts PUT, OPEN, PUSH, and STOVE/INTERACT. The failure modes match the ablated concept.
-      </p>
+    <div class="columns" style="margin-top: 2rem;">
+      <div class="column is-half">
+        <div class="figure-container">
+          <img src="./static/images/qualitative_put.png" alt="PUT concept ablation">
+          <p class="figure-caption">
+            PUT concept ablation (L8): &ldquo;Put the cream cheese in the bowl.&rdquo; Top: baseline completes pick-and-place (91 steps). Bottom: with PUT features zeroed, the robot fails to execute the placement, timing out at 300 steps.
+          </p>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="figure-container">
+          <img src="./static/images/qualitative_open.png" alt="OPEN concept ablation">
+          <p class="figure-caption">
+            OPEN concept ablation (L8): &ldquo;Open the middle drawer of the cabinet.&rdquo; Top: baseline reaches for the middle drawer, grasps and pulls it open (140 steps). Bottom: with OPEN features zeroed, the robot opens the bottom drawer instead of the middle, misdirecting the motor program to the wrong target (300 steps, task failure).
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -484,7 +427,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title has-text-centered">Models Studied</h2>
     <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
-      Six architectures, 80M to 7B parameters, three action generation paradigms
+      Five VLAs and one language-free control, 80M to 7B parameters, three action generation paradigms
     </p>
 
     <div class="columns is-multiline">
@@ -504,17 +447,17 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #6930c3, #5390d9);">V</div>
           <div class="model-name">OpenVLA-OFT</div>
           <div class="model-params">7B parameters</div>
-          <div class="model-desc">LLaMA-2 7B backbone with Orthogonal Fine-Tuning (OFT) adapters. Continuous L1 regression action head. 7-DOF action tokens with 8-step chunking.</div>
+          <div class="model-desc">LLaMA-2 7B backbone with Optimized Fine-Tuning (OFT) adapters. Continuous L1 regression action head. 7-DOF action tokens with 8-step chunking.</div>
           <span class="model-badge badge-primary">L1 Regression</span>
         </div>
       </div>
-      <!-- ACT-ALOHA -->
+      <!-- ACT (language-free control) -->
       <div class="column is-one-third">
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #2d6a4f, #52b788);">A</div>
-          <div class="model-name">ACT-ALOHA</div>
-          <div class="model-params">80M parameters</div>
-          <div class="model-desc">ResNet encoder + transformer decoder. CVAE with action chunking for bimanual manipulation (TransferCube, Insertion).</div>
+          <div class="model-name">ACT</div>
+          <div class="model-params">80M parameters &middot; Language-free control</div>
+          <div class="model-desc">ResNet encoder + transformer decoder. CVAE with action chunking for bimanual manipulation (TransferCube, Insertion). Serves as a non-VLA baseline.</div>
           <span class="model-badge badge-warm">CVAE Decoder</span>
         </div>
       </div>
@@ -524,7 +467,7 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #76b900, #43a047);">G</div>
           <div class="model-name">GR00T N1.5</div>
           <div class="model-params">3B parameters</div>
-          <div class="model-desc">NVIDIA's foundation model with triple-pathway architecture: Eagle VLM for visual encoding, VL-SA for vision-language fusion, and DiT (Diffusion Transformer) action head for humanoid control.</div>
+          <div class="model-desc">NVIDIA's foundation model with Eagle 2.5 VLM backbone and flow-matching DiT action head. Our analysis decomposes its 32 layers into three functional types: 16 DiT blocks, 12 Eagle LM blocks, and 4 VL Self-Attention blocks.</div>
           <span class="model-badge badge-green">Diffusion Transformer</span>
         </div>
       </div>
@@ -543,36 +486,44 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #ef476f, #d62828);">X</div>
           <div class="model-name">X-VLA</div>
-          <div class="model-params">1B parameters</div>
+          <div class="model-params">~1B parameters</div>
           <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot).</div>
           <span class="model-badge badge-primary">Flow Matching + Soft Prompts</span>
         </div>
       </div>
     </div>
 
+    <!-- Capability Radar -->
+    <div class="figure-container" style="margin-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+      <img src="./static/images/fig_spider_cross_model.png" alt="Cross-model capability radar">
+      <p class="figure-caption has-text-centered">
+        Cross-model capability radar. Five VLAs scored on baseline success, visual override strength, language sensitivity, SAE fidelity, cross-task transfer rate, and pathway specialization. OFT lacks pathway specialization (single-pathway architecture); SmolVLA and GR00T show the strongest pathway specialization alongside Pi0.5.
+      </p>
+    </div>
+
     <!-- Benchmarks -->
     <h3 class="title is-5" style="margin-top: 3rem; color: var(--primary); text-align: center;">Benchmarks</h3>
     <div class="columns is-multiline" style="margin-top: 1rem;">
       <div class="column is-one-quarter">
-        <div class="content-card has-text-centered" style="padding: 1.25rem;">
+        <div class="benchmark-card">
           <h5 style="font-weight: 700; color: var(--primary); margin-bottom: 0.25rem;">LIBERO</h5>
-          <p style="color: var(--text-light); font-size: 0.82rem;">4 suites, 40 tasks<br>MuJoCo tabletop manipulation</p>
+          <p style="color: var(--text-light); font-size: 0.82rem;">4 suites, 40 tasks<br>MuJoCo tabletop</p>
         </div>
       </div>
       <div class="column is-one-quarter">
-        <div class="content-card has-text-centered" style="padding: 1.25rem;">
+        <div class="benchmark-card">
           <h5 style="font-weight: 700; color: var(--primary); margin-bottom: 0.25rem;">SimplerEnv</h5>
           <p style="color: var(--text-light); font-size: 0.82rem;">10 tasks, 2 embodiments<br>WidowX + Google Robot</p>
         </div>
       </div>
       <div class="column is-one-quarter">
-        <div class="content-card has-text-centered" style="padding: 1.25rem;">
+        <div class="benchmark-card">
           <h5 style="font-weight: 700; color: var(--primary); margin-bottom: 0.25rem;">ALOHA-sim</h5>
           <p style="color: var(--text-light); font-size: 0.82rem;">Bimanual tasks<br>TransferCube, Insertion</p>
         </div>
       </div>
       <div class="column is-one-quarter">
-        <div class="content-card has-text-centered" style="padding: 1.25rem;">
+        <div class="benchmark-card">
           <h5 style="font-weight: 700; color: var(--primary); margin-bottom: 0.25rem;">MetaWorld</h5>
           <p style="color: var(--text-light); font-size: 0.82rem;">50 manipulation tasks<br>Multi-task evaluation</p>
         </div>
@@ -630,27 +581,20 @@
         <tr>
           <td><strong>ACT</strong></td>
           <td>1,870</td>
-          <td>&mdash;</td>
-          <td>&mdash;</td>
+          <td>-</td>
+          <td>-</td>
           <td>ALOHA</td>
         </tr>
         <tr style="font-weight: 700; border-top: 2px solid var(--border);">
           <td><strong>Total</strong></td>
-          <td><strong>351,000+</strong></td>
-          <td><strong>388</strong></td>
+          <td><strong>394,000+</strong></td>
+          <td><strong>424</strong></td>
           <td><strong>82+</strong></td>
           <td><strong>4 benchmarks</strong></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- Physical experiments coming soon -->
-    <div class="content-card has-text-centered" style="margin-top: 1.5rem; border: 2px dashed rgba(192, 57, 43, 0.25); background: transparent; box-shadow: none;">
-      <p style="color: var(--text-mid); font-size: 0.95rem;">
-        <span class="coming-soon" style="margin-right: 8px;">Coming Soon</span>
-        <strong>Physical Robot Experiments</strong> on UR5 and Franka Panda hardware
-      </p>
-    </div>
   </div>
 </section>
 
@@ -741,18 +685,6 @@
   </div>
 </section>
 
-<!-- ===== SUMMARY FIGURE ===== -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="figure-container" style="box-shadow: none; background: transparent; padding: 0;">
-      <img src="./static/images/fig8_summary.png" alt="Summary of all findings" style="border-radius: 12px; box-shadow: var(--shadow-soft);">
-      <p class="figure-caption has-text-centered">
-        <strong>Summary.</strong> All findings across six models: activation injection, SAE analysis, concept ablation, linear probing, and temporal dynamics.
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- ===== CITATION ===== -->
 <section class="section section-alt" id="citation">
   <div class="container is-max-desktop">
@@ -770,21 +702,6 @@
 }</pre>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CODE RELEASE NOTICE ===== -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="content-card has-text-centered" style="border: 2px dashed rgba(192, 57, 43, 0.25);">
-      <p style="font-size: 1.1rem; color: var(--primary); font-weight: 700; margin-bottom: 0.5rem;">
-        <span class="coming-soon" style="margin-right: 8px;">Coming Soon</span>
-        Code &amp; Data Release
-      </p>
-      <p style="color: var(--text-mid); line-height: 1.7; max-width: 600px; margin: 0 auto;">
-        Full codebase (SAE training, concept identification, ablation/steering, linear probing) and the Action Atlas platform will be released on paper acceptance. Pre-trained SAE checkpoints and activation datasets included.
-      </p>
     </div>
   </div>
 </section>
