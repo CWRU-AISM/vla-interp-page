@@ -38,7 +38,7 @@
         <a class="navbar-item" href="#results">Results</a>
         <a class="navbar-item" href="#models">Models</a>
         <a class="navbar-item" href="#action-atlas">Action Atlas</a>
-        <span class="navbar-item" style="color: rgba(255,255,255,0.35) !important; cursor: default;">Setup &amp; Tutorial</span>
+        <a class="navbar-item" href="tutorial.html">Setup &amp; Tutorial</a>
       </div>
       <div class="navbar-end">
         <a class="navbar-item" href="https://action-atlas.com" target="_blank" style="color: var(--accent-light) !important;">
@@ -51,53 +51,42 @@
 </nav>
 
 <!-- ===== HERO ===== -->
-<section class="hero is-large hero-gradient" style="padding-top: 52px;">
-  <div class="hero-body">
+<section class="hero is-large hero-gradient" style="padding-top: 52px; position: relative; overflow: hidden;">
+  <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35;">
+    <source src="./static/videos/hero_bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-body" style="position: relative; z-index: 1;">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
 
-          <!-- Robot Icon -->
-          <div class="robot-container" style="margin-bottom: 1.5rem;">
-            <svg width="64" height="64" viewBox="0 0 64 64" class="robot-wave">
-              <!-- Antenna -->
-              <line x1="32" y1="4" x2="32" y2="14" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" />
-              <circle cx="32" cy="3" r="2.5" fill="#ef4444" class="robot-antenna-blink" />
-              <!-- Head -->
-              <rect x="20" y="14" width="24" height="18" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
-              <!-- Eyes -->
-              <circle cx="28" cy="23" r="3" fill="#e74c3c" class="robot-eye" />
-              <circle cx="36" cy="23" r="3" fill="#e74c3c" class="robot-eye" />
-              <!-- Eye highlights -->
-              <circle cx="29" cy="22" r="1" fill="white" opacity="0.7" />
-              <circle cx="37" cy="22" r="1" fill="white" opacity="0.7" />
-              <!-- Mouth -->
-              <path d="M27 28 Q32 31 37 28" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" />
-              <!-- Body -->
-              <rect x="22" y="34" width="20" height="14" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
-              <!-- Chest light -->
-              <circle cx="32" cy="41" r="2" fill="#ef4444" opacity="0.8" class="robot-antenna-blink" />
-              <!-- Left arm (static) -->
-              <rect x="12" y="36" width="8" height="4" rx="2" fill="#334155" />
-              <circle cx="12" cy="38" r="2.5" fill="#475569" />
-              <!-- Right arm (waving) -->
-              <g class="robot-arm-wave">
-                <rect x="44" y="34" width="8" height="4" rx="2" fill="#334155" />
-                <circle cx="52" cy="36" r="2.5" fill="#475569" />
-                <!-- Hand -->
-                <path d="M54 34 L56 30 M54 34 L57 33 M54 34 L56 37" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" />
-              </g>
-              <!-- Legs -->
-              <rect x="25" y="49" width="5" height="8" rx="2" fill="#334155" />
-              <rect x="34" y="49" width="5" height="8" rx="2" fill="#334155" />
-              <!-- Feet -->
-              <rect x="23" y="55" width="9" height="4" rx="2" fill="#475569" />
-              <rect x="32" y="55" width="9" height="4" rx="2" fill="#475569" />
-            </svg>
-          </div>
-
-          <h1 class="title is-1 publication-title" style="margin-bottom: 1rem;">
+          <h1 class="title is-1 publication-title" style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
             Not All Features Are Created Equal
+            <a href="https://action-atlas.com" target="_blank" style="display: inline-flex; text-decoration: none;" title="Launch Action Atlas">
+              <svg width="48" height="48" viewBox="0 0 64 64" class="robot-wave" style="cursor: pointer;">
+                <line x1="32" y1="4" x2="32" y2="14" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" />
+                <circle cx="32" cy="3" r="2.5" fill="#ef4444" class="robot-antenna-blink" />
+                <rect x="20" y="14" width="24" height="18" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+                <circle cx="28" cy="23" r="3" fill="#e74c3c" class="robot-eye" />
+                <circle cx="36" cy="23" r="3" fill="#e74c3c" class="robot-eye" />
+                <circle cx="29" cy="22" r="1" fill="white" opacity="0.7" />
+                <circle cx="37" cy="22" r="1" fill="white" opacity="0.7" />
+                <path d="M27 28 Q32 31 37 28" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                <rect x="22" y="34" width="20" height="14" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+                <circle cx="32" cy="41" r="2" fill="#ef4444" opacity="0.8" class="robot-antenna-blink" />
+                <rect x="12" y="36" width="8" height="4" rx="2" fill="#334155" />
+                <circle cx="12" cy="38" r="2.5" fill="#475569" />
+                <g class="robot-arm-wave">
+                  <rect x="44" y="34" width="8" height="4" rx="2" fill="#334155" />
+                  <circle cx="52" cy="36" r="2.5" fill="#475569" />
+                  <path d="M54 34 L56 30 M54 34 L57 33 M54 34 L56 37" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" />
+                </g>
+                <rect x="25" y="49" width="5" height="8" rx="2" fill="#334155" />
+                <rect x="34" y="49" width="5" height="8" rx="2" fill="#334155" />
+                <rect x="23" y="55" width="9" height="4" rx="2" fill="#475569" />
+                <rect x="32" y="55" width="9" height="4" rx="2" fill="#475569" />
+              </svg>
+            </a>
           </h1>
           <h2 class="subtitle is-4" style="margin-bottom: 2rem; font-weight: 400;">
             A Mechanistic Study of Vision-Language-Action Models
@@ -131,16 +120,24 @@
               </a>
             </span>
             <span class="link-block">
-              <span class="external-link button is-normal is-rounded" style="opacity: 0.5; cursor: default; pointer-events: none; background-color: #888; color: #ccc; border-color: #888;">
+              <a href="https://arxiv.org/abs/2603.19233v1" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon"><i class="ai ai-arxiv"></i></span>
                 <span>arXiv</span>
-              </span>
+              </a>
             </span>
             <span class="link-block">
-              <span class="external-link button is-normal is-rounded" style="opacity: 0.5; cursor: default; pointer-events: none; background-color: #888; color: #ccc; border-color: #888;">
+              <a href="https://github.com/CWRU-AISM/action-atlas" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon"><i class="fab fa-github"></i></span>
-                <span>Code</span> <span class="coming-soon" style="margin-left: 8px;">3/27</span>
-              </span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#" class="external-link button is-normal is-rounded is-dark" style="position: relative;" onclick="event.preventDefault();">
+                <span class="icon">
+                  <img src="./static/images/hf-logo.png" alt="HuggingFace" style="width: 18px; height: 18px;">
+                </span>
+                <span>HuggingFace</span> <span class="coming-soon" style="margin-left: 8px;">4/10</span>
+              </a>
             </span>
             <span class="link-block">
               <a href="https://action-atlas.com" class="button is-normal is-rounded is-accent" target="_blank">
@@ -165,7 +162,7 @@
         <div class="stat-label">VLA Models</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">394,000+</div>
+        <div class="stat-number">424,000+</div>
         <div class="stat-label">Rollout Episodes</div>
       </div>
       <div class="stat-item">
@@ -192,7 +189,7 @@
         <h2 class="title is-3 section-title has-text-centered">Abstract</h2>
         <div class="content has-text-justified" style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-mid);">
           <p>
-            Vision-Language-Action (VLA) models combine perception, language, and motor control in a single architecture, yet how they translate multimodal inputs into actions remains poorly understood. We apply activation injection, sparse autoencoders (SAEs), and linear probes to <strong>six models spanning 80M-7B parameters</strong> across <strong>394,000+ rollout episodes</strong> on four benchmarks. The visual pathway dominates action generation across all architectures: injecting baseline activations into null-prompt episodes recovers near-identical behavior, while cross-task injection steers robots toward source-task positions (99.8% of X-VLA episodes align with the source trajectory), exposing spatially bound motor programs tied to scene coordinates. <strong>Language sensitivity depends on task structure, not model design</strong>: when visual context uniquely specifies the task, language is ignored; when multiple goals share a scene, language becomes essential (X-VLA <code>libero_goal</code>: 94%&rarr;10% under wrong prompts vs. <code>libero_object</code>: 60-100% regardless). In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways encode motor programs while VLM pathways encode goal semantics (2&times; greater behavioral displacement from expert injection), and subspace injection confirms these occupy separable activation subspaces. Per-token SAE processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a> for interactive exploration of VLA representations across all six models.
+            Vision-Language-Action (VLA) models combine perception, language, and motor control in a single architecture, yet how they translate multimodal inputs into actions remains poorly understood. We apply activation injection, sparse autoencoders (SAEs), and linear probes to <strong>six models spanning 80M-7B parameters</strong> across <strong>424,000+ rollout episodes</strong> on four benchmarks. The visual pathway dominates action generation across all architectures: injecting baseline activations into null-prompt episodes recovers near-identical behavior, while cross-task injection steers robots toward source-task positions (99.8% of X-VLA episodes align with the source trajectory), exposing spatially bound motor programs tied to scene coordinates. <strong>Language sensitivity depends on task structure, not model design</strong>: when visual context uniquely specifies the task, language is ignored; when multiple goals share a scene, language becomes essential (X-VLA <code>libero_goal</code>: 94%&rarr;10% under wrong prompts vs. <code>libero_object</code>: 60-100% regardless). In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways encode motor programs while VLM pathways encode goal semantics (2&times; greater behavioral displacement from expert injection), and subspace injection confirms these occupy separable activation subspaces. Per-token SAE processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a> for interactive exploration of VLA representations across all six models.
           </p>
         </div>
       </div>
@@ -224,10 +221,7 @@
             Sparse Autoencoders (SAEs)
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We train <strong>424+ TopK SAEs</strong> (k=64) across all six models with 4-8x expansion: 1024&rarr;8192 (Pi0.5 expert, X-VLA), 4096&rarr;32768 (OFT), 960&rarr;4096/480&rarr;4096 (SmolVLA VLM/expert), and 1536-2048&rarr;12288-16384 (GR00T DiT/Eagle/VL-SA). Each action token is processed independently to preserve temporal structure for motor control. Pooling strategy effects on rollout fidelity are architecture-dependent.
-          </p>
-          <p style="color: var(--text-mid); line-height: 1.7; margin-top: 0.75rem;">
-            Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> using Cohen's d effect size between concept-present and concept-absent episodes, multiplied by activation frequency.
+            We train <strong>424+ TopK SAEs</strong> (k=64) across all six models with 4-8x expansion. Each action token is processed independently to preserve temporal structure. Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> using Cohen's d, recovering 82+ manipulation concepts.
           </p>
         </div>
       </div>
@@ -437,7 +431,7 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">&#960;</div>
           <div class="model-name">Pi0.5</div>
           <div class="model-params">3B parameters</div>
-          <div class="model-desc">Dual-pathway architecture (PaliGemma VLM + Gemma action expert). Flow matching with 50-step denoising. 50 action token chunking.</div>
+          <div class="model-desc">PaliGemma VLM (SigLIP + Gemma 2.6B) with dedicated Gemma action expert (18L, 1024-dim). Flow matching with 50-step denoising and 50-step action chunking. Dual-pathway: VLM conditions expert.</div>
           <span class="model-badge badge-primary">Flow Matching</span>
         </div>
       </div>
@@ -447,8 +441,8 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #6930c3, #5390d9);">V</div>
           <div class="model-name">OpenVLA-OFT</div>
           <div class="model-params">7B parameters</div>
-          <div class="model-desc">LLaMA-2 7B backbone with Optimized Fine-Tuning (OFT) adapters. Continuous L1 regression action head. 7-DOF action tokens with 8-step chunking.</div>
-          <span class="model-badge badge-primary">L1 Regression</span>
+          <div class="model-desc">Llama-2 7B with DINOv2 + SigLIP vision encoders. MLPResNet action head produces all 7 DOFs in one forward pass with 8-step chunking. Optimized Fine-Tuning via LoRA adapters preserves pretrained representation geometry.</div>
+          <span class="model-badge badge-primary">Continuous L1 Regression</span>
         </div>
       </div>
       <!-- ACT (language-free control) -->
@@ -467,8 +461,8 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #76b900, #43a047);">G</div>
           <div class="model-name">GR00T N1.5</div>
           <div class="model-params">3B parameters</div>
-          <div class="model-desc">NVIDIA's foundation model with Eagle 2.5 VLM backbone and flow-matching DiT action head. Our analysis decomposes its 32 layers into three functional types: 16 DiT blocks, 12 Eagle LM blocks, and 4 VL Self-Attention blocks.</div>
-          <span class="model-badge badge-green">Diffusion Transformer</span>
+          <div class="model-desc">NVIDIA's triple-pathway foundation model: 16 DiT layers, 12 Eagle LM layers, and 4 VL Self-Attention layers (32 total). Flow-matching transformer for action generation.</div>
+          <span class="model-badge badge-green">Flow-Matching DiT</span>
         </div>
       </div>
       <!-- SmolVLA -->
@@ -477,8 +471,8 @@
           <div class="model-icon" style="background: linear-gradient(135deg, #f77f00, #e36414);">S</div>
           <div class="model-name">SmolVLA</div>
           <div class="model-params">450M parameters</div>
-          <div class="model-desc">Compact VLA with interleaved VLM and expert pathways. Continuous action generation with SmolVLM backbone. Tested on LIBERO (4 suites) and MetaWorld (50 tasks).</div>
-          <span class="model-badge badge-warm">Interleaved VLM+Expert</span>
+          <div class="model-desc">Interleaved dual-pathway: 32 VLM layers (960-dim) and 32 expert layers (480-dim) execute in alternation. Flow matching action generation with asynchronous inference. Tested on LIBERO (4 suites) and MetaWorld (50 tasks).</div>
+          <span class="model-badge badge-primary">Flow Matching</span>
         </div>
       </div>
       <!-- X-VLA -->
@@ -559,7 +553,7 @@
         </tr>
         <tr>
           <td><strong>X-VLA</strong></td>
-          <td>50,000+</td>
+          <td>80,000+</td>
           <td>96</td>
           <td>82</td>
           <td>LIBERO, SimplerEnv</td>
@@ -587,7 +581,7 @@
         </tr>
         <tr style="font-weight: 700; border-top: 2px solid var(--border);">
           <td><strong>Total</strong></td>
-          <td><strong>394,000+</strong></td>
+          <td><strong>424,000+</strong></td>
           <td><strong>424</strong></td>
           <td><strong>82+</strong></td>
           <td><strong>4 benchmarks</strong></td>
@@ -668,7 +662,7 @@
             </div>
             <div>
               <img src="./static/images/atlas_wires.png" alt="Action Atlas Layer Wires">
-              <p class="atlas-img-label">Layer Wires</p>
+              <p class="atlas-img-label">Layer Circuits</p>
             </div>
             <div>
               <img src="./static/images/atlas_ablation.png" alt="Action Atlas Ablation Studies">
@@ -693,12 +687,15 @@
       <div class="column is-four-fifths">
         <div class="bibtex-block" id="bibtex">
           <button class="copy-btn" onclick="copyBibtex()">Copy</button>
-<pre style="margin: 0; white-space: pre-wrap;">@article{2026vla_interp,
-  title   = {Not All Features Are Created Equal: A Mechanistic
-             Study of Vision-Language-Action Models},
-  author  = {Grant, Bryce and Zhao, Xijia and Wang, Peng},
-  year    = {2026},
-  url     = {https://arxiv.org/abs/}
+<pre style="margin: 0; white-space: pre-wrap;">@misc{grant2026featurescreatedequalmechanistic,
+  title         = {Not All Features Are Created Equal: A Mechanistic
+                   Study of Vision-Language-Action Models},
+  author        = {Bryce Grant and Xijia Zhao and Peng Wang},
+  year          = {2026},
+  eprint        = {2603.19233},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  url           = {https://arxiv.org/abs/2603.19233}
 }</pre>
         </div>
       </div>
@@ -719,7 +716,7 @@
       <div class="column is-half has-text-right">
         <p style="margin-bottom: 0.5rem;">
           <a href="https://action-atlas.com" target="_blank" style="margin-right: 1rem;">Action Atlas</a>
-          <a href="https://github.com/CWRU-AISM/vla_interp" target="_blank">GitHub</a>
+          <a href="https://github.com/CWRU-AISM/action-atlas" target="_blank">GitHub</a>
         </p>
         <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">
           Website template inspired by <a href="https://nerfies.github.io" target="_blank" style="color: rgba(255,255,255,0.5);">Nerfies</a>.
@@ -756,6 +753,8 @@
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     });
   }
+
+
 </script>
 
 </body>
