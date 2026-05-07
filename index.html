@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description" content="Not All Features Are Created Equal: Mechanistic Interpretability of Vision-Language-Action Models.">
-  <meta name="keywords" content="VLA, Vision-Language-Action, Interpretability, Sparse Autoencoders, SAE, Robotics, Pi0.5, OpenVLA, Action Atlas">
+  <meta name="keywords" content="VLA, Vision-Language-Action, Interpretability, Sparse Autoencoders, SAE, Robotics, Pi0.5, OpenVLA, X-VLA, SmolVLA, GR00T, Action Atlas">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Not All Features Are Created Equal | VLA Interpretability</title>
 
@@ -107,8 +107,14 @@
           <div class="is-size-6 publication-authors" style="margin-bottom: 0.5rem;">
             <span class="author-block" style="color: rgba(255,255,255,0.6);"><sup>1</sup>Electrical, Computer, and Systems Engineering, Case Western Reserve University</span>
           </div>
-          <div class="is-size-6 publication-authors" style="margin-bottom: 2rem;">
+          <div class="is-size-6 publication-authors" style="margin-bottom: 1.25rem;">
             <span class="author-block" style="color: rgba(255,255,255,0.6);"><sup>2</sup>Mechanical and Aerospace Engineering, Case Western Reserve University</span>
+          </div>
+
+          <div style="margin-bottom: 2rem;">
+            <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(192, 57, 43, 0.18); border: 1px solid rgba(231, 76, 60, 0.45); color: #f5b7b1; font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em;">
+              ICLR 2026 Multimodal Intelligence Workshop <span style="color: #fff;">(Oral)</span>
+            </span>
           </div>
 
           <!-- Links -->
@@ -120,9 +126,9 @@
               </a>
             </span>
             <span class="link-block">
-              <a href="https://arxiv.org/abs/2603.19233v1" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="#" class="external-link button is-normal is-rounded is-dark" style="position: relative;" onclick="event.preventDefault();">
                 <span class="icon"><i class="ai ai-arxiv"></i></span>
-                <span>arXiv</span>
+                <span>arXiv</span> <span class="coming-soon" style="margin-left: 8px;">soon</span>
               </a>
             </span>
             <span class="link-block">
@@ -158,20 +164,20 @@
   <div class="container is-max-desktop">
     <div class="stats-bar">
       <div class="stat-item">
-        <div class="stat-number">5</div>
-        <div class="stat-label">VLA Models</div>
+        <div class="stat-number">6</div>
+        <div class="stat-label">VLA Architectures</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">424,000+</div>
+        <div class="stat-number">420,000+</div>
         <div class="stat-label">Rollout Episodes</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">424</div>
+        <div class="stat-number">520+</div>
         <div class="stat-label">SAE Checkpoints</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">~7 TB</div>
-        <div class="stat-label">Activation Data</div>
+        <div class="stat-number">79</div>
+        <div class="stat-label">Manipulation Concepts</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">4</div>
@@ -189,7 +195,7 @@
         <h2 class="title is-3 section-title has-text-centered">Abstract</h2>
         <div class="content has-text-justified" style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-mid);">
           <p>
-            Vision-Language-Action (VLA) models combine perception, language, and motor control in a single architecture, yet how they translate multimodal inputs into actions remains poorly understood. We apply activation injection, sparse autoencoders (SAEs), and linear probes to <strong>six models spanning 80M-7B parameters</strong> across <strong>424,000+ rollout episodes</strong> on four benchmarks. The visual pathway dominates action generation across all architectures: injecting baseline activations into null-prompt episodes recovers near-identical behavior, while cross-task injection steers robots toward source-task positions (99.8% of X-VLA episodes align with the source trajectory), exposing spatially bound motor programs tied to scene coordinates. <strong>Language sensitivity depends on task structure, not model design</strong>: when visual context uniquely specifies the task, language is ignored; when multiple goals share a scene, language becomes essential (X-VLA <code>libero_goal</code>: 94%&rarr;10% under wrong prompts vs. <code>libero_object</code>: 60-100% regardless). In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways encode motor programs while VLM pathways encode goal semantics (2&times; greater behavioral displacement from expert injection), and subspace injection confirms these occupy separable activation subspaces. Per-token SAE processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a> for interactive exploration of VLA representations across all six models.
+            A fine-tuned Vision-Language-Action (VLA) policy will pick up the alphabet soup and place it in the basket on demand, then drop the soup off the table when an evaluator shifts the basket five centimeters left. We use activation injection to ask what the policy is doing: inject task A's activations into task B's scene at the action expert, and <strong>&pi;0.5 executes task A's motor trajectory in 99.6% of episodes (n = 1,968); X-VLA does so in 99.8%</strong>. The injected program is bound to <strong>absolute workspace coordinates rather than the visible scene</strong>, which mechanistically explains the perturbation brittleness reported in concurrent benchmark work. The same intervention framework applied across six VLAs (&pi;0.5, OpenVLA-OFT, X-VLA, SmolVLA, GR00T&nbsp;N1.5, and ACT as a language-free control) on LIBERO, MetaWorld, SimplerEnv, and ALOHA over <strong>420,000+ rollouts</strong> surfaces three further findings: language is encoded by every architecture yet behaviorally ignored when vision uniquely identifies the goal; SAE pooling preference splits along architecture lines (&pi;0.5 per-token, X-VLA mean-pool, SmolVLA indifferent); and pathway specialization replicates wherever expert and VLM pathways are separable. SmolVLA's interleaved fusion attenuates the headline to 52.1% LIBERO override, scoping universality. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive feature-exploration platform covering all 520+ trained SAEs and 79 identified concepts.
           </p>
         </div>
       </div>
@@ -221,7 +227,7 @@
             Sparse Autoencoders (SAEs)
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We train <strong>424+ TopK SAEs</strong> (k=64) across all six models with 4-8x expansion. Each action token is processed independently to preserve temporal structure. Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> using Cohen's d, recovering 82+ manipulation concepts.
+            We train <strong>520+ TopK SAEs</strong> (k=64) across all six models with 4&ndash;8&times; expansion. Each action token is processed independently to preserve temporal structure. Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> (Cohen's d &times; top-k frequency), recovering 79 aligned manipulation concepts.
           </p>
         </div>
       </div>
@@ -232,10 +238,10 @@
             Activation Injection &amp; Causal Interventions
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We test causality with four injection conditions: <strong>null injection</strong> (correct prompt to empty string), <strong>same-scene steering</strong> (redirect to alternate targets), <strong>cross-task injection</strong> (transfer across visual scenes), and <strong>cross-seed</strong> (same task, different initial conditions).
+            We test causality with four injection conditions: <strong>null injection</strong> (correct prompt to empty string), <strong>same-scene steering</strong> (redirect to alternate targets), <strong>cross-task injection</strong> (transfer across visual scenes), and <strong>random-direction</strong> (norm-matched control: 22% source behavior vs. 99.6% directed).
           </p>
           <p style="color: var(--text-mid); line-height: 1.7; margin-top: 0.75rem;">
-            <strong>Concept ablation</strong> zeros out specific SAE features during live rollouts, while <strong>feature steering</strong> scales feature activations by alpha to amplify or suppress encoded behaviors.
+            <strong>Concept ablation</strong> zeros out specific SAE features during live rollouts, while <strong>feature steering</strong> scales feature activations by &alpha; to amplify or suppress encoded behaviors.
           </p>
         </div>
       </div>
@@ -249,7 +255,7 @@
             Linear Probes
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            Ridge regression probes achieve 97-98% R&#178; across all action dimensions. A <strong>projection operator test</strong> confirms causality: projecting out the probe direction drops R&#178; to 0%.
+            Ridge regression probes recover prompt-category labels at <strong>&gt; 99% accuracy</strong> from the residual stream of every model tested. A <strong>projection operator test</strong> confirms causality: projecting out the probe direction drops downstream R&#178; to chance.
           </p>
         </div>
       </div>
@@ -260,7 +266,7 @@
             Counterfactual Prompting
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We test language grounding with <strong>6 prompt variations</strong> across Pi0.5 (3,396+ episodes, ANOVA p = 0.25), SmolVLA (MetaWorld, 4 difficulty levels), and X-VLA (LIBERO + SimplerEnv): baseline, null (empty string), negation, motor commands, object swap, and temporal switches.
+            We test language grounding with <strong>6 prompt variations</strong> across <strong>11,226 counterfactual episodes</strong> spanning all five language-capable VLAs: baseline, null (empty string), negation, motor commands, object swap, and mid-episode temporal switches. SmolVLA is additionally evaluated across MetaWorld's four difficulty tiers.
           </p>
         </div>
       </div>
@@ -273,39 +279,39 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title has-text-centered">Key Findings</h2>
     <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
-      Four findings that hold across five VLA architectures
+      A five-step argument across six VLA architectures
     </p>
 
     <div class="findings-list">
       <div class="finding-item">
         <div class="finding-marker">1</div>
         <div>
-          <h4>Visual Pathway Dominates Action Generation</h4>
-          <p>Injecting baseline visual activations into null-prompt episodes recovers near-identical behavior (cos&nbsp;=&nbsp;0.999). Cross-task injection steers robots toward source-task positions: 99.8% of X-VLA episodes align with the source trajectory, exposing spatially bound motor programs tied to scene coordinates.</p>
+          <h4>Visual Context Dominates Action Generation</h4>
+          <p>Replacing the prompt with an empty string and replaying the image stream from a different episode restores actions to cosine &ge; 0.99 against the original, with rollout success recovering to 14&ndash;77% across all six architectures. Zeroing the visual pathway collapses every model to noise.</p>
         </div>
       </div>
 
       <div class="finding-item">
         <div class="finding-marker">2</div>
         <div>
-          <h4>Language Sensitivity Depends on Task Structure</h4>
-          <p>When visual context uniquely specifies the task, language is ignored. When multiple goals share a scene, language becomes essential: X-VLA <code>libero_goal</code> drops from 94% to 10% under wrong prompts, while <code>libero_object</code> maintains 60-100% regardless of prompt.</p>
+          <h4>Motor Programs Bind to Absolute Spatial Coordinates</h4>
+          <p>Cross-task injection rebinds the trajectory, not the goal: &pi;0.5 99.6% (n=1,968), X-VLA 99.8% (n=3,150), OpenVLA-OFT 96.4% (n=1,079, tie-conditional), GR00T 57.0%, SmolVLA 52.1% on LIBERO. A norm-matched random-direction control yields 22%; a vision-only ACT controller produces 0.0% override by construction.</p>
         </div>
       </div>
 
       <div class="finding-item">
         <div class="finding-marker">3</div>
         <div>
-          <h4>Expert Pathways Encode Motor Programs</h4>
-          <p>In all three multi-pathway architectures (Pi0.5, SmolVLA, GR00T), expert pathways cause 2&times; greater behavioral displacement than VLM pathways. Subspace injection confirms these occupy separable activation subspaces: expert for HOW, VLM for WHAT.</p>
+          <h4>Language Becomes Necessary Only When Vision Is Ambiguous</h4>
+          <p>Linear probes recover prompt-category labels at &gt; 99% accuracy: the goal <em>is</em> encoded. Yet on visually unambiguous suites, replacing the prompt does almost nothing: across 11,226 counterfactual episodes, &pi;0.5 / LIBERO-Object yields F(4,3391)=1.23, p=0.247, &eta;&sup2;=0.0015. Language matters only when scenes are visually ambiguous.</p>
         </div>
       </div>
 
       <div class="finding-item">
         <div class="finding-marker">4</div>
         <div>
-          <h4>Per-Token SAE Processing Is Architecture-Dependent</h4>
-          <p>Per-token processing is essential for action fidelity on most architectures, though mean-pooling improves fidelity on X-VLA. Contrastive identification recovers 82+ manipulation concepts; causal ablation reveals sensitivity spanning 28-92% zero-effect rates independent of representation width.</p>
+          <h4>Pathway Specialization &amp; Architecture-Tied SAE Structure</h4>
+          <p>In all three multi-pathway architectures (&pi;0.5, SmolVLA, GR00T), expert pathways encode HOW and VLM pathways encode WHAT. SmolVLA's expert carries 78.6% of cross-task override vs. 25.6% for the VLM. Single-feature ablation produces 28&ndash;92% zero-effect rates depending on architecture; SAE pooling preference is architecture-tied (per-token for &pi;0.5 / OFT, mean-pool for X-VLA, indifferent on SmolVLA).</p>
         </div>
       </div>
     </div>
@@ -322,7 +328,7 @@
         <div class="figure-container">
           <img src="./static/images/fig_cross_task_displacement.png" alt="Cross-task displacement override rates">
           <p class="figure-caption">
-            Cross-task displacement override rates. Left: override rate across five models. Pi0.5 (99.6%) and X-VLA (99.8%) show near-complete source behavior transfer; OFT 77.9%; GR00T 57.0% (suite-dependent). Right: SmolVLA pathway displacement (15.8% expert vs. 9.0% VLM).
+            Cross-task injection override rates. Pi0.5 99.6% (n=1,968) and X-VLA 99.8% (n=3,150) show near-complete source behavior transfer; OpenVLA-OFT 96.4% (n=1,079, tie-conditional; 77.9% tie-inclusive); GR00T 57.0%; SmolVLA 52.1% on LIBERO with strong pathway split (78.6% expert vs. 25.6% VLM). Vision-only ACT control: 0.0%.
           </p>
         </div>
       </div>
@@ -330,7 +336,7 @@
         <div class="figure-container">
           <img src="./static/images/fig5_language.png" alt="Language ignored despite internal distinction">
           <p class="figure-caption">
-            Language is ignored despite internal distinction. Left: counterfactual prompting across 3,396+ episodes shows no significant behavioral difference (p&gt;0.24). Right: layer 17 classifiers distinguish prompts with 99.3% accuracy, yet behavior is unchanged.
+            Language is encoded yet behaviorally ignored on visually unambiguous suites. &pi;0.5 / LIBERO-Object across 3,396 counterfactual episodes shows no significant behavioral difference (F(4,3391)=1.23, p=0.247, &eta;&sup2;=0.0015), even though layer-17 classifiers distinguish the same prompts at &gt; 99% accuracy.
           </p>
         </div>
       </div>
@@ -339,7 +345,7 @@
     <div class="figure-container" style="margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
       <img src="./static/images/fig_concept_ablation_cross_model.png" alt="Concept ablation causal sensitivity">
       <p class="figure-caption has-text-centered">
-        Concept ablation causal sensitivity across five models. SmolVLA (480-dim expert) is the most sensitive at 28% zero-effect rate; OFT (4096-dim) and X-VLA (1024-dim) are the most resilient at 92% and 82%. Causal sensitivity does not follow representation width.
+        Single-feature concept ablation across five language-capable VLAs. SmolVLA (480-dim expert) is the most sensitive at 28% zero-effect rate; OpenVLA-OFT (4096-dim) and X-VLA (1024-dim) are the most resilient at 92% and 82%. Causal sensitivity does not follow representation width; it is architecture-tied.
       </p>
     </div>
 
@@ -429,10 +435,10 @@
       <div class="column is-one-third">
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">&#960;</div>
-          <div class="model-name">Pi0.5</div>
-          <div class="model-params">3B parameters</div>
+          <div class="model-name">&pi;0.5</div>
+          <div class="model-params">3B parameters, cross-task override 99.6% (n=1,968)</div>
           <div class="model-desc">PaliGemma VLM (SigLIP + Gemma 2.6B) with dedicated Gemma action expert (18L, 1024-dim). Flow matching with 50-step denoising and 50-step action chunking. Dual-pathway: VLM conditions expert.</div>
-          <span class="model-badge badge-primary">Flow Matching</span>
+          <span class="model-badge badge-primary">Flow Matching, Dual Pathway</span>
         </div>
       </div>
       <!-- OpenVLA-OFT -->
@@ -440,7 +446,7 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #6930c3, #5390d9);">V</div>
           <div class="model-name">OpenVLA-OFT</div>
-          <div class="model-params">7B parameters</div>
+          <div class="model-params">7B parameters, cross-task override 96.4% (tie-conditional)</div>
           <div class="model-desc">Llama-2 7B with DINOv2 + SigLIP vision encoders. MLPResNet action head produces all 7 DOFs in one forward pass with 8-step chunking. Optimized Fine-Tuning via LoRA adapters preserves pretrained representation geometry.</div>
           <span class="model-badge badge-primary">Continuous L1 Regression</span>
         </div>
@@ -450,9 +456,9 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #2d6a4f, #52b788);">A</div>
           <div class="model-name">ACT</div>
-          <div class="model-params">80M parameters &middot; Language-free control</div>
-          <div class="model-desc">ResNet encoder + transformer decoder. CVAE with action chunking for bimanual manipulation (TransferCube, Insertion). Serves as a non-VLA baseline.</div>
-          <span class="model-badge badge-warm">CVAE Decoder</span>
+          <div class="model-params">80M parameters, cross-task override 0.0% (n=10)</div>
+          <div class="model-desc">ResNet encoder + transformer decoder. CVAE with action chunking for bimanual manipulation (TransferCube, Insertion). Vision-only by construction; cross-task injection is bit-identical to baseline. Serves as the non-VLA control.</div>
+          <span class="model-badge badge-warm">CVAE, Vision-only Control</span>
         </div>
       </div>
       <!-- GR00T N1.5 -->
@@ -460,9 +466,9 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #76b900, #43a047);">G</div>
           <div class="model-name">GR00T N1.5</div>
-          <div class="model-params">3B parameters</div>
-          <div class="model-desc">NVIDIA's triple-pathway foundation model: 16 DiT layers, 12 Eagle LM layers, and 4 VL Self-Attention layers (32 total). Flow-matching transformer for action generation.</div>
-          <span class="model-badge badge-green">Flow-Matching DiT</span>
+          <div class="model-params">3B parameters, cross-task override 57.0% (n=270)</div>
+          <div class="model-desc">NVIDIA's triple-pathway foundation model: 16 DiT layers, 12 Eagle LM layers, and 4 VL Self-Attention layers (32 total). DiT carries the motor signal: zeroing any DiT layer collapses every suite to 0%, while the four VL-SA layers tolerate ablation with 40 to 80% residual success.</div>
+          <span class="model-badge badge-green">Flow-Matching DiT, Triple Pathway</span>
         </div>
       </div>
       <!-- SmolVLA -->
@@ -470,9 +476,9 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #f77f00, #e36414);">S</div>
           <div class="model-name">SmolVLA</div>
-          <div class="model-params">450M parameters</div>
-          <div class="model-desc">Interleaved dual-pathway: 32 VLM layers (960-dim) and 32 expert layers (480-dim) execute in alternation. Flow matching action generation with asynchronous inference. Tested on LIBERO (4 suites) and MetaWorld (50 tasks).</div>
-          <span class="model-badge badge-primary">Flow Matching</span>
+          <div class="model-params">450M parameters, LIBERO 52.1%, MetaWorld 12.4%</div>
+          <div class="model-desc">Interleaved dual-pathway: 32 VLM layers (960-dim) and 32 expert layers (480-dim) execute in alternation. The interleaved fusion mechanically attenuates cross-task override (expert pathway 78.6% vs. VLM pathway 25.6% on LIBERO); we treat SmolVLA as a scoping case for the universality claim.</div>
+          <span class="model-badge badge-primary">Flow Matching, Interleaved</span>
         </div>
       </div>
       <!-- X-VLA -->
@@ -480,8 +486,8 @@
         <div class="model-card">
           <div class="model-icon" style="background: linear-gradient(135deg, #ef476f, #d62828);">X</div>
           <div class="model-name">X-VLA</div>
-          <div class="model-params">~1B parameters</div>
-          <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot).</div>
+          <div class="model-params">~1B parameters, cross-task override 99.8% (n=3,150)</div>
+          <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot). Override is reported under action-vector cosine; an EEF-velocity classifier yields 52.8% (both disclosed in the paper's limitations).</div>
           <span class="model-badge badge-primary">Flow Matching + Soft Prompts</span>
         </div>
       </div>
@@ -538,37 +544,37 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong>Pi0.5</strong></td>
-          <td>65,000+</td>
-          <td>36</td>
+          <td><strong>&pi;0.5</strong></td>
+          <td>71,500+</td>
+          <td>72</td>
           <td>43</td>
           <td>LIBERO</td>
         </tr>
         <tr>
           <td><strong>OpenVLA-OFT</strong></td>
           <td>70,700+</td>
-          <td>32</td>
+          <td>96</td>
           <td>45</td>
           <td>LIBERO</td>
         </tr>
         <tr>
           <td><strong>X-VLA</strong></td>
-          <td>80,000+</td>
-          <td>96</td>
+          <td>50,000+</td>
+          <td>120</td>
           <td>82</td>
           <td>LIBERO, SimplerEnv</td>
         </tr>
         <tr>
           <td><strong>SmolVLA</strong></td>
-          <td>42,000+</td>
-          <td>192</td>
+          <td>58,000+</td>
+          <td>146</td>
           <td>45</td>
           <td>LIBERO, MetaWorld</td>
         </tr>
         <tr>
           <td><strong>GR00T N1.5</strong></td>
           <td>164,700+</td>
-          <td>68</td>
+          <td>87</td>
           <td>36</td>
           <td>LIBERO</td>
         </tr>
@@ -581,9 +587,9 @@
         </tr>
         <tr style="font-weight: 700; border-top: 2px solid var(--border);">
           <td><strong>Total</strong></td>
-          <td><strong>424,000+</strong></td>
-          <td><strong>424</strong></td>
-          <td><strong>82+</strong></td>
+          <td><strong>420,000+</strong></td>
+          <td><strong>520+</strong></td>
+          <td><strong>79 unique</strong></td>
           <td><strong>4 benchmarks</strong></td>
         </tr>
       </tbody>
