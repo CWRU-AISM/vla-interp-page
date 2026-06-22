@@ -2,10 +2,10 @@
 
 ### A Mechanistic Study of Vision-Language-Action Models
 
-[Bryce Grant](https://bryceag11.github.io), [Xijia Zhao](https://xijiazhao.github.io/), [Peng Wang](https://pengwangucla.github.io/)<br>
+[Bryce Grant](https://bryceag11.github.io), [Xijia Zhao](https://xijiazhao.github.io/), [Peng Wang](https://scholar.google.com/citations?user=4CbVWDcAAAAJ&hl=en)<br>
 Case Western Reserve University
 
-ICLR 2026 Multimodal Intelligence Workshop (Oral)
+ICLR 2026 Multimodal Intelligence Oral
 
 <a href="https://arxiv.org/abs/2603.19233"><img src="https://img.shields.io/badge/arXiv-2603.19233-b31b1b.svg" alt="arXiv"></a>
 <a href="https://cwru-aism.github.io/vla-interp-page/"><img src="https://img.shields.io/badge/Project-Page-blue" alt="Project Page"></a>
