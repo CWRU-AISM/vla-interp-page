@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Not All Features Are Created Equal | VLA Interpretability</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦾</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231a1a2e'/><line x1='32' y1='13' x2='32' y2='21' stroke='%23c0392b' stroke-width='3' stroke-linecap='round'/><circle cx='32' cy='11' r='3' fill='%23c0392b'/><rect x='18' y='21' width='28' height='22' rx='6' fill='none' stroke='%23c0392b' stroke-width='3'/><circle cx='26' cy='32' r='3.2' fill='%23c0392b'/><circle cx='38' cy='32' r='3.2' fill='%23c0392b'/></svg>">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
 </nav>
 
 <!-- ===== HERO ===== -->
-<section class="hero is-large hero-gradient" style="padding-top: 52px; position: relative; overflow: hidden;">
+<section class="hero is-large hero-solid" style="padding-top: 52px; position: relative; overflow: hidden;">
   <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35;">
     <source src="./static/videos/hero_bg.mp4" type="video/mp4">
   </video>
@@ -112,8 +112,8 @@
           </div>
 
           <div style="margin-bottom: 2rem;">
-            <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(192, 57, 43, 0.18); border: 1px solid rgba(231, 76, 60, 0.45); color: #f5b7b1; font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em;">
-              ICLR 2026 Multimodal Intelligence Workshop <span style="color: #fff;">(Oral)</span>
+            <span style="color: rgba(255,255,255,0.7); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;">
+              ICLR 2026 Multimodal Intelligence Workshop <span style="color: rgba(255,255,255,0.95);">(Oral)</span>
             </span>
           </div>
 
@@ -310,8 +310,16 @@
       <div class="finding-item">
         <div class="finding-marker">4</div>
         <div>
-          <h4>Pathway Specialization &amp; Architecture-Tied SAE Structure</h4>
-          <p>In all three multi-pathway architectures (&pi;0.5, SmolVLA, GR00T), expert pathways encode HOW and VLM pathways encode WHAT. SmolVLA's expert carries 78.6% of cross-task override vs. 25.6% for the VLM. Single-feature ablation produces 28&ndash;92% zero-effect rates depending on architecture; SAE pooling preference is architecture-tied (per-token for &pi;0.5 / OFT, mean-pool for X-VLA, indifferent on SmolVLA).</p>
+          <h4>Expert Pathways Encode HOW; VLM Pathways Encode WHAT</h4>
+          <p>In all three multi-pathway architectures (&pi;0.5, SmolVLA, GR00T), expert pathways carry the motor program and VLM pathways carry the goal. SmolVLA's expert accounts for 78.6% of cross-task override against 25.6% for the VLM, isolating the bind/select interface to the expert stream.</p>
+        </div>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-marker">5</div>
+        <div>
+          <h4>SAE Pooling Preference Is Architecture-Tied, Not Universal</h4>
+          <p>Which pooling preserves rollout fidelity is an architectural property, not a universal VLA property: per-token preserves &pi;0.5 and OpenVLA-OFT, mean-pool suits X-VLA, and SmolVLA is indifferent. Single-feature SAE ablation produces 28&ndash;92% zero-effect rates depending on architecture, and causal sensitivity does not follow representation width.</p>
         </div>
       </div>
     </div>
@@ -434,7 +442,7 @@
       <!-- Pi0.5 -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">&#960;</div>
+          <div class="model-icon" style="background: #c0392b;">&#960;</div>
           <div class="model-name">&pi;0.5</div>
           <div class="model-params">3B parameters, cross-task override 99.6% (n=1,968)</div>
           <div class="model-desc">PaliGemma VLM (SigLIP + Gemma 2.6B) with dedicated Gemma action expert (18L, 1024-dim). Flow matching with 50-step denoising and 50-step action chunking. Dual-pathway: VLM conditions expert.</div>
@@ -444,7 +452,7 @@
       <!-- OpenVLA-OFT -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #6930c3, #5390d9);">V</div>
+          <div class="model-icon" style="background: #5b34b0;">V</div>
           <div class="model-name">OpenVLA-OFT</div>
           <div class="model-params">7B parameters, cross-task override 96.4% (tie-conditional)</div>
           <div class="model-desc">Llama-2 7B with DINOv2 + SigLIP vision encoders. MLPResNet action head produces all 7 DOFs in one forward pass with 8-step chunking. Optimized Fine-Tuning via LoRA adapters preserves pretrained representation geometry.</div>
@@ -454,7 +462,7 @@
       <!-- ACT (language-free control) -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #2d6a4f, #52b788);">A</div>
+          <div class="model-icon" style="background: #2d6a4f;">A</div>
           <div class="model-name">ACT</div>
           <div class="model-params">80M parameters, cross-task override 0.0% (n=10)</div>
           <div class="model-desc">ResNet encoder + transformer decoder. CVAE with action chunking for bimanual manipulation (TransferCube, Insertion). Vision-only by construction; cross-task injection is bit-identical to baseline. Serves as the non-VLA control.</div>
@@ -464,7 +472,7 @@
       <!-- GR00T N1.5 -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #76b900, #43a047);">G</div>
+          <div class="model-icon" style="background: #5a9216;">G</div>
           <div class="model-name">GR00T N1.5</div>
           <div class="model-params">3B parameters, cross-task override 57.0% (n=270)</div>
           <div class="model-desc">NVIDIA's triple-pathway foundation model: 16 DiT layers, 12 Eagle LM layers, and 4 VL Self-Attention layers (32 total). DiT carries the motor signal: zeroing any DiT layer collapses every suite to 0%, while the four VL-SA layers tolerate ablation with 40 to 80% residual success.</div>
@@ -474,7 +482,7 @@
       <!-- SmolVLA -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #f77f00, #e36414);">S</div>
+          <div class="model-icon" style="background: #e36414;">S</div>
           <div class="model-name">SmolVLA</div>
           <div class="model-params">450M parameters, LIBERO 52.1%, MetaWorld 12.4%</div>
           <div class="model-desc">Interleaved dual-pathway: 32 VLM layers (960-dim) and 32 expert layers (480-dim) execute in alternation. The interleaved fusion mechanically attenuates cross-task override (expert pathway 78.6% vs. VLM pathway 25.6% on LIBERO); we treat SmolVLA as a scoping case for the universality claim.</div>
@@ -484,7 +492,7 @@
       <!-- X-VLA -->
       <div class="column is-one-third">
         <div class="model-card">
-          <div class="model-icon" style="background: linear-gradient(135deg, #ef476f, #d62828);">X</div>
+          <div class="model-icon" style="background: #d62828;">X</div>
           <div class="model-name">X-VLA</div>
           <div class="model-params">~1B parameters, cross-task override 99.8% (n=3,150)</div>
           <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot). Override is reported under action-vector cosine; an EEF-velocity classifier yields 52.8% (both disclosed in the paper's limitations).</div>
@@ -652,7 +660,7 @@
           </div>
 
           <div style="margin-top: 1.5rem;">
-            <a href="https://action-atlas.com" target="_blank" class="button is-medium is-rounded" style="background: white; color: var(--primary); font-weight: 700; border: none;">
+            <a href="https://action-atlas.com" target="_blank" class="button is-medium" style="background: white; color: var(--primary); font-weight: 700; border: none; border-radius: 6px;">
               <span class="icon"><i class="fas fa-external-link-alt"></i></span>
               <span>Launch Action Atlas</span>
             </a>
