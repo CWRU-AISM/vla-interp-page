@@ -52,7 +52,7 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero is-large hero-solid" style="padding-top: 52px; position: relative; overflow: hidden;">
-  <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35;">
+  <video autoplay muted loop playsinline preload="auto" poster="./static/videos/hero_poster.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35;">
     <source src="./static/videos/hero_bg.mp4" type="video/mp4">
   </video>
   <div class="hero-body" style="position: relative; z-index: 1;">
@@ -113,7 +113,7 @@
 
           <div style="margin-bottom: 2rem;">
             <span style="color: rgba(255,255,255,0.7); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;">
-              NeurIPS 2026 <span style="color: rgba(255,255,255,0.95);">Poster</span> &middot; earlier version: ICLR 2026 Multimodal Intelligence Workshop (Oral)
+              NeurIPS 2026 <span style="color: rgba(255,255,255,0.95);">Poster</span> &nbsp;|&nbsp; ICLR 2026 Multimodal Intelligence <span style="color: rgba(255,255,255,0.95);">Oral</span>
             </span>
           </div>
 
@@ -341,7 +341,7 @@
 
     <div class="columns" style="margin-top: 2rem;">
       <div class="column is-half">
-        <div class="figure-container">
+        <div class="figure-container figure-row">
           <img src="./static/images/fig_cross_task_displacement.png" alt="Cross-task displacement override rates">
           <p class="figure-caption">
             Cross-task injection override rates, tie-band-conditional under action-vector cosine: &pi;0.5 99.6% (n=1,968), X-VLA 99.8% (n=3,150), OpenVLA-OFT 96.4% (n=1,079), GR00T 57.0% (n=270). Tie-band fractions differ sharply across models, so the conditional rates are not directly comparable; tie-inclusive rates per metric are in the paper. Right: SmolVLA pathway split on LIBERO, 78.6% expert vs. 25.6% VLM (n=720).
@@ -349,10 +349,10 @@
         </div>
       </div>
       <div class="column is-half">
-        <div class="figure-container">
-          <img src="./static/images/fig_physical_cloud.png" alt="Directed injection on the UR10e as a motion point cloud">
+        <div class="figure-container figure-row">
+          <img src="./static/images/fig_physical_cloud.png" alt="Directed injection on the UR10e">
           <p class="figure-caption">
-            Directed injection on the UR10e as a motion point cloud. Plushie program injected at expert L16/L17 under the prompt to stack the blocks; tracked points coloured from start (blue) to end (red) over a metric-depth reconstruction of the workspace. The arm leaves the home pose, reaches the plushie, and carries it to the bowl while the blocks stay untouched.
+            Directed injection on the UR10e. Plushie program injected at expert L16/L17 under the prompt to stack the blocks: the arm leaves the home pose, reaches the plushie, and carries it to the bowl while the blocks stay untouched. Tracked points colored from start (blue) to end (red) over a metric-depth reconstruction of the workspace.
           </p>
         </div>
       </div>
