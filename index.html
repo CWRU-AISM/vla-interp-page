@@ -113,7 +113,7 @@
 
           <div style="margin-bottom: 2rem;">
             <span style="color: rgba(255,255,255,0.7); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;">
-              ICLR 2026 Multimodal Intelligence <span style="color: rgba(255,255,255,0.95);">Oral</span>
+              NeurIPS 2026 <span style="color: rgba(255,255,255,0.95);">Poster</span> &middot; earlier version: ICLR 2026 Multimodal Intelligence Workshop (Oral)
             </span>
           </div>
 
@@ -195,7 +195,7 @@
         <h2 class="title is-3 section-title has-text-centered">Abstract</h2>
         <div class="content has-text-justified" style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-mid);">
           <p>
-            A fine-tuned Vision-Language-Action (VLA) policy will pick up the alphabet soup and place it in the basket on demand, then drop the soup off the table when an evaluator shifts the basket five centimeters left. We use activation injection to ask what the policy is doing: inject task A's activations into task B's scene at the action expert, and <strong>&pi;0.5 executes task A's motor trajectory in 99.6% of episodes (n = 1,968); X-VLA does so in 99.8%</strong>. The injected program is bound to <strong>absolute workspace coordinates rather than the visible scene</strong>, which mechanistically explains the perturbation brittleness reported in concurrent benchmark work. The same intervention framework applied across six VLAs (&pi;0.5, OpenVLA-OFT, X-VLA, SmolVLA, GR00T&nbsp;N1.5, and ACT as a language-free control) on LIBERO, MetaWorld, SimplerEnv, and ALOHA over <strong>420,000+ rollouts</strong> surfaces three further findings: language is encoded by every architecture yet behaviorally ignored when vision uniquely identifies the goal; SAE pooling preference splits along architecture lines (&pi;0.5 per-token, X-VLA mean-pool, SmolVLA indifferent); and pathway specialization replicates wherever expert and VLM pathways are separable. SmolVLA's interleaved fusion attenuates the headline to 52.1% LIBERO override, scoping universality. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive feature-exploration platform covering all 520+ trained SAEs and 79 identified concepts.
+            A fine-tuned Vision-Language-Action (VLA) policy can easily place the alphabet soup in the basket on command, just as it saw during fine-tuning. However, if the basket is shifted five centimeters to the left, it drops the soup off the table. We developed an interpretability pipeline to investigate what such a policy is computing. Injecting task A's activations into the action expert while the policy looks at task B's scene makes <strong>&pi;0.5 execute task A's motor trajectory in 99.6% of episodes (n = 1,968)</strong>. The injected program is bound to <strong>absolute workspace coordinates</strong> and ignores the visible scene, which provides a mechanistic account of the perturbation brittleness that concurrent benchmarks report. <strong>The binding holds on a physical UR10e</strong>: directed replay redirects the commanded task in 26/26 rollouts in one direction and 18/26 in the other, with no-injection and random-direction controls at the floor, and once the source object is moved 10&ndash;15&nbsp;cm the arm grasps and releases at the recorded coordinates in 50/50 trials, picking up the wrong block when one sits there and closing on empty air when none does. Applying the same interventions to six VLAs (&pi;0.5, OpenVLA-OFT, X-VLA, SmolVLA, GR00T&nbsp;N1.5, and ACT as a language-free control) on LIBERO, MetaWorld, SimplerEnv, and ALOHA over <strong>420,000+ rollouts</strong> yields three further findings: every architecture encodes the instruction yet weights it far below vision whenever the scene alone identifies the goal; the SAE pooling that preserves behavior is architecture-specific (&pi;0.5 per-token, X-VLA mean-pool, SmolVLA indifferent); and goal selection and motor generation separate into VLM and expert pathways wherever the two are distinguishable. The effect is not universal: SmolVLA's interleaved fusion lowers the override to 52.1% on LIBERO. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive platform covering all 520+ trained SAEs, 79 identified concepts, and the scored UR10e rollouts.
           </p>
         </div>
       </div>
@@ -238,7 +238,7 @@
             Activation Injection &amp; Causal Interventions
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We test causality with four injection conditions: <strong>null injection</strong> (correct prompt to empty string), <strong>same-scene steering</strong> (redirect to alternate targets), <strong>cross-task injection</strong> (transfer across visual scenes), and <strong>random-direction</strong> (norm-matched control: 22% source behavior vs. 99.6% directed).
+            We test causality with four injection conditions: <strong>null injection</strong> (correct prompt to empty string), <strong>same-scene steering</strong> (redirect to alternate targets), <strong>cross-task injection</strong> (transfer across visual scenes), and <strong>random-direction</strong> (norm-matched control: 22% source behavior at n=50 and 45.5% override at n=200, against 99.6% directed).
           </p>
           <p style="color: var(--text-mid); line-height: 1.7; margin-top: 0.75rem;">
             <strong>Concept ablation</strong> zeros out specific SAE features during live rollouts, while <strong>feature steering</strong> scales feature activations by &alpha; to amplify or suppress encoded behaviors.
@@ -266,7 +266,7 @@
             Counterfactual Prompting
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We test language grounding with <strong>6 prompt variations</strong> across <strong>11,226 counterfactual episodes</strong> spanning all five language-capable VLAs: baseline, null (empty string), negation, motor commands, object swap, and mid-episode temporal switches. SmolVLA is additionally evaluated across MetaWorld's four difficulty tiers.
+            We test language grounding with <strong>6 prompt variations</strong> across all five language-capable VLAs: baseline, null (empty string), negation, motor commands, object swap, and mid-episode temporal switches, at up to <strong>500 episodes per cell</strong> (&pi;0.5 and SmolVLA on LIBERO). SmolVLA is additionally evaluated across MetaWorld's four difficulty tiers.
           </p>
         </div>
       </div>
@@ -279,7 +279,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title has-text-centered">Key Findings</h2>
     <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
-      A five-step argument across six VLA architectures
+      A six-step argument across six VLA architectures, in simulation and on hardware
     </p>
 
     <div class="findings-list">
@@ -287,7 +287,7 @@
         <div class="finding-marker">1</div>
         <div>
           <h4>Visual Context Dominates Action Generation</h4>
-          <p>Replacing the prompt with an empty string and replaying the image stream from a different episode restores actions to cosine &ge; 0.99 against the original, with rollout success recovering to 14&ndash;77% across all six architectures. Zeroing the visual pathway collapses every model to noise.</p>
+          <p>Replacing the prompt with an empty string and replaying the image stream from a different episode restores actions to cosine &ge; 0.99 against the original, with rollout success recovering to 14&ndash;80% on &pi;0.5 and OpenVLA-OFT. Zeroing any single layer sends X-VLA and GR00T-DiT to 0%, while SmolVLA tolerates single expert-layer zeroing.</p>
         </div>
       </div>
 
@@ -295,7 +295,7 @@
         <div class="finding-marker">2</div>
         <div>
           <h4>Motor Programs Bind to Absolute Spatial Coordinates</h4>
-          <p>Cross-task injection rebinds the trajectory, not the goal: &pi;0.5 99.6% (n=1,968), X-VLA 99.8% (n=3,150), OpenVLA-OFT 96.4% (n=1,079, tie-conditional), GR00T 57.0%, SmolVLA 52.1% on LIBERO. A norm-matched random-direction control yields 22%; a vision-only ACT controller produces 0.0% override by construction.</p>
+          <p>Cross-task injection rebinds the trajectory, not the goal. Tie-inclusive override, labelled per metric: &pi;0.5 99.6% (n=1,968, action cosine), OpenVLA-OFT 77.9% (n=1,079, action cosine; 96.4% tie-conditional), X-VLA 52.8% (n=2,907, end-effector velocity; 99.8% tie-conditional under action cosine), SmolVLA 52.1% (n=720), GR00T 6.7% (n=180, end-effector velocity; 57.0% action cosine). A norm-matched random direction gives chance-level override (45.5%, n=200), and the vision-only ACT control produces 0.0% by construction.</p>
         </div>
       </div>
 
@@ -303,7 +303,7 @@
         <div class="finding-marker">3</div>
         <div>
           <h4>Language Becomes Necessary Only When Vision Is Ambiguous</h4>
-          <p>Linear probes recover prompt-category labels at &gt; 99% accuracy: the goal <em>is</em> encoded. Yet on visually unambiguous suites, replacing the prompt does almost nothing: across 3,396 counterfactual episodes, &pi;0.5 / LIBERO-Object yields F(4,3391)=1.23, p=0.247, &eta;&sup2;=0.0015. Language matters only when scenes are visually ambiguous.</p>
+          <p>Linear probes recover prompt-category labels at &gt; 99% accuracy: the instruction <em>is</em> encoded. Its behavioral weight depends on the scene: with an empty prompt &pi;0.5 keeps 31.6% success on LIBERO-Object and 5.8% on LIBERO-Goal (n=500 per cell, baselines 91.0% and 92.6%), a 5.4&times; gap between the visually unambiguous and ambiguous suites; told <em>not</em> to do the task, it does it in 96.7% of episodes. OpenVLA-OFT keeps 96% under a null prompt on Object and 12% on Goal.</p>
         </div>
       </div>
 
@@ -311,12 +311,20 @@
         <div class="finding-marker">4</div>
         <div>
           <h4>Expert Pathways Encode HOW; VLM Pathways Encode WHAT</h4>
-          <p>In all three multi-pathway architectures (&pi;0.5, SmolVLA, GR00T), expert pathways carry the motor program and VLM pathways carry the goal. SmolVLA's expert accounts for 78.6% of cross-task override against 25.6% for the VLM, isolating the bind/select interface to the expert stream.</p>
+          <p>Quantified on SmolVLA and reproduced directionally on &pi;0.5 and GR00T: expert pathways carry the motor program and VLM pathways carry the goal. SmolVLA's expert accounts for 78.6% of cross-task override against 25.6% for the VLM, and its expert activations decode ground-truth state at 4.5&times; the VLM rate; on &pi;0.5 the VLM side decodes the goal better (76.4% vs. 62.6%).</p>
         </div>
       </div>
 
       <div class="finding-item">
         <div class="finding-marker">5</div>
+        <div>
+          <h4>The Program Replicates on a Physical UR10e</h4>
+          <p>&pi;0.5 fine-tuned on a UR10e over seven tabletop tasks, same wholesale expert replay at L16/L17 between plushie-in-bowl and gray-on-blue stacking. Directed injection redirects the commanded task in 26/26 rollouts in one direction and 18/26 in the other, against matched-scene floors of 0/24 and 0/25 and a norm-matched random direction at 0/25 and 1/23. With the source object moved 10&ndash;15&nbsp;cm, the injected program drives the arm to the recorded coordinates in 50/50 trials while the uninjected policy reaches the displaced object.</p>
+        </div>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-marker">6</div>
         <div>
           <h4>SAE Pooling Preference Is Architecture-Tied, Not Universal</h4>
           <p>Which pooling preserves rollout fidelity is an architectural property, not a universal VLA property: per-token preserves &pi;0.5 and OpenVLA-OFT, mean-pool suits X-VLA, and SmolVLA is indifferent. Single-feature SAE ablation produces 28&ndash;92% zero-effect rates depending on architecture, and causal sensitivity does not follow representation width.</p>
@@ -336,15 +344,15 @@
         <div class="figure-container">
           <img src="./static/images/fig_cross_task_displacement.png" alt="Cross-task displacement override rates">
           <p class="figure-caption">
-            Cross-task injection override rates. &pi;0.5 99.6% (n=1,968) and X-VLA 99.8% (n=3,150) show near-complete source behavior transfer; OpenVLA-OFT 96.4% (n=1,079, tie-conditional; 77.9% tie-inclusive); GR00T 57.0%; SmolVLA 52.1% on LIBERO with strong pathway split (78.6% expert vs. 25.6% VLM). Vision-only ACT control: 0.0%.
+            Cross-task injection override rates, tie-band-conditional under action-vector cosine: &pi;0.5 99.6% (n=1,968), X-VLA 99.8% (n=3,150), OpenVLA-OFT 96.4% (n=1,079), GR00T 57.0% (n=270). Tie-band fractions differ sharply across models, so the conditional rates are not directly comparable; tie-inclusive rates per metric are in the paper. Right: SmolVLA pathway split on LIBERO, 78.6% expert vs. 25.6% VLM (n=720).
           </p>
         </div>
       </div>
       <div class="column is-half">
         <div class="figure-container">
-          <img src="./static/images/fig5_language.png" alt="Language ignored despite internal distinction">
+          <img src="./static/images/fig_physical_cloud.png" alt="Directed injection on the UR10e as a motion point cloud">
           <p class="figure-caption">
-            Language is encoded yet behaviorally ignored on visually unambiguous suites. &pi;0.5 / LIBERO-Object across 3,396 counterfactual episodes shows no significant behavioral difference (F(4,3391)=1.23, p=0.247, &eta;&sup2;=0.0015), even though layer-17 classifiers distinguish the same prompts at &gt; 99% accuracy.
+            Directed injection on the UR10e as a motion point cloud. Plushie program injected at expert L16/L17 under the prompt to stack the blocks; tracked points coloured from start (blue) to end (red) over a metric-depth reconstruction of the workspace. The arm leaves the home pose, reaches the plushie, and carries it to the bowl while the blocks stay untouched.
           </p>
         </div>
       </div>
@@ -454,7 +462,7 @@
         <div class="model-card">
           <div class="model-icon" style="background: #5b34b0;">V</div>
           <div class="model-name">OpenVLA-OFT</div>
-          <div class="model-params">7B parameters, cross-task override 96.4% (tie-conditional)</div>
+          <div class="model-params">7B parameters, cross-task override 77.9% tie-inclusive (96.4% tie-conditional)</div>
           <div class="model-desc">Llama-2 7B with DINOv2 + SigLIP vision encoders. MLPResNet action head produces all 7 DOFs in one forward pass with 8-step chunking. Optimized Fine-Tuning via LoRA adapters preserves pretrained representation geometry.</div>
           <span class="model-badge badge-primary">Continuous L1 Regression</span>
         </div>
@@ -494,7 +502,7 @@
         <div class="model-card">
           <div class="model-icon" style="background: #d62828;">X</div>
           <div class="model-name">X-VLA</div>
-          <div class="model-params">~1B parameters, cross-task override 99.8% (n=3,150)</div>
+          <div class="model-params">~1B parameters, cross-task override 52.8% tie-inclusive under end-effector velocity (99.8% tie-conditional, action cosine)</div>
           <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot). Override is reported under action-vector cosine; an EEF-velocity classifier yields 52.8% (both disclosed in the paper's limitations).</div>
           <span class="model-badge badge-primary">Flow Matching + Soft Prompts</span>
         </div>
@@ -505,7 +513,7 @@
     <div class="figure-container" style="margin-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
       <img src="./static/images/fig_spider_cross_model.png" alt="Cross-model capability radar">
       <p class="figure-caption has-text-centered">
-        Cross-model capability radar. Five VLAs scored on baseline success, visual override strength, language sensitivity, SAE fidelity, cross-task transfer rate, and pathway specialization. OpenVLA-OFT lacks pathway specialization (single-pathway architecture); SmolVLA and GR00T show the strongest pathway specialization alongside &pi;0.5.
+        Cross-model capability radar, each axis a linear map of one table in the paper: baseline success, visual override (destination success lost under injection), language tolerance (null-prompt over correct-prompt success), SAE fidelity (best-arm rollout success), cross-task transfer (tie-inclusive override), and ablation tolerance (zero-effect rate of single-feature ablation).
       </p>
     </div>
 
@@ -555,7 +563,7 @@
           <td><strong>&pi;0.5</strong></td>
           <td>71,500+</td>
           <td>72</td>
-          <td>43</td>
+          <td>46</td>
           <td>LIBERO</td>
         </tr>
         <tr>
@@ -567,23 +575,23 @@
         </tr>
         <tr>
           <td><strong>X-VLA</strong></td>
-          <td>50,000+</td>
+          <td>74,500+</td>
           <td>120</td>
-          <td>82</td>
+          <td>55</td>
           <td>LIBERO, SimplerEnv</td>
         </tr>
         <tr>
           <td><strong>SmolVLA</strong></td>
           <td>58,000+</td>
           <td>146</td>
-          <td>45</td>
+          <td>60</td>
           <td>LIBERO, MetaWorld</td>
         </tr>
         <tr>
           <td><strong>GR00T N1.5</strong></td>
           <td>164,700+</td>
           <td>87</td>
-          <td>36</td>
+          <td>39</td>
           <td>LIBERO</td>
         </tr>
         <tr>
@@ -701,15 +709,13 @@
       <div class="column is-four-fifths">
         <div class="bibtex-block" id="bibtex">
           <button class="copy-btn" onclick="copyBibtex()">Copy</button>
-<pre style="margin: 0; white-space: pre-wrap;">@misc{grant2026featurescreatedequalmechanistic,
-  title         = {Not All Features Are Created Equal: A Mechanistic
-                   Study of Vision-Language-Action Models},
-  author        = {Bryce Grant and Xijia Zhao and Peng Wang},
-  year          = {2026},
-  eprint        = {2603.19233},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.RO},
-  url           = {https://arxiv.org/abs/2603.19233}
+<pre style="margin: 0; white-space: pre-wrap;">@inproceedings{grant2026notallfeatures,
+  title     = {Not All Features Are Created Equal: A Mechanistic
+               Study of Vision-Language-Action Models},
+  author    = {Bryce Grant and Xijia Zhao and Peng Wang},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2603.19233}
 }</pre>
         </div>
       </div>
