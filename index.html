@@ -119,7 +119,7 @@
           <!-- Links -->
           <div class="publication-links">
             <span class="link-block">
-              <a href="./paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="./camera_ready.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon"><i class="fas fa-file-pdf"></i></span>
                 <span>Paper</span>
               </a>
@@ -194,7 +194,7 @@
         <h2 class="title is-3 section-title has-text-centered">Abstract</h2>
         <div class="content has-text-justified" style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-mid);">
           <p>
-            A fine-tuned Vision-Language-Action (VLA) policy can easily place the alphabet soup in the basket on command, just as it saw during fine-tuning. However, if the basket is shifted five centimeters to the left, it drops the soup off the table. We developed an interpretability pipeline to investigate what such a policy is computing. Injecting task A's activations into the action expert while the policy looks at task B's scene makes <strong>&pi;0.5 execute task A's motor trajectory in 99.6% of episodes (n = 1,968)</strong>. The injected program is bound to <strong>absolute workspace coordinates</strong> and ignores the visible scene, which provides a mechanistic account of the perturbation brittleness that concurrent benchmarks report. <strong>The binding holds on a physical UR10e</strong>: directed replay redirects the commanded task in 26/26 rollouts in one direction and 18/26 in the other, with no-injection and random-direction controls at the floor, and once the source object is moved 10&ndash;15&nbsp;cm the arm grasps and releases at the recorded coordinates in 50/50 trials, picking up the wrong block when one sits there and closing on empty air when none does. Applying the same interventions to six VLAs (&pi;0.5, OpenVLA-OFT, X-VLA, SmolVLA, GR00T&nbsp;N1.5, and ACT as a language-free control) on LIBERO, MetaWorld, SimplerEnv, and ALOHA over <strong>420,000+ rollouts</strong> yields three further findings: every architecture encodes the instruction yet weights it far below vision whenever the scene alone identifies the goal; the SAE pooling that preserves behavior is architecture-specific (&pi;0.5 per-token, X-VLA mean-pool, SmolVLA indifferent); and goal selection and motor generation separate into VLM and expert pathways wherever the two are distinguishable. The effect is not universal: SmolVLA's interleaved fusion lowers the override to 52.1% on LIBERO. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive platform covering all 520+ trained SAEs, 79 identified concepts, and the scored UR10e rollouts.
+            A fine-tuned Vision-Language-Action (VLA) policy can place the alphabet soup in the basket on command, just as it saw during fine-tuning. However, if the basket is shifted five centimeters to the left, it drops the soup off the table. We developed an interpretability pipeline to investigate what the policy is computing. Injecting task A's activations into the action expert while the policy looks at task B's scene makes <strong>&pi;0.5 execute task A's motor trajectory in 99.6% of episodes (n = 1,968)</strong>. The effect is not universal, and the override falls to 52.1% on SmolVLA, where the interleaved fusion attenuates it, and to 57.0% on GR00T&nbsp;N1.5. The injected program is bound to <strong>absolute workspace coordinates</strong> and ignores the visible scene, which provides a mechanistic account of the perturbation brittleness that concurrent benchmarks report. <strong>The binding holds on a physical UR10e</strong>: directed replay redirects the commanded task in 26/26 rollouts in one direction and 18/26 in the other, with no-injection and random-direction controls at the floor. Once the source object is moved 10&ndash;15&nbsp;cm, the arm grasps and releases at the recorded coordinates in 50/50 trials, picking up the wrong block when one sits there and closing on empty air when none does. Applying the same interventions to five VLAs (&pi;0.5, OpenVLA-OFT, X-VLA, SmolVLA, GR00T&nbsp;N1.5) and ACT as a language-free control, on LIBERO, MetaWorld, SimplerEnv, and ALOHA over <strong>420,000+ rollouts</strong>, yields three findings: every architecture encodes the instruction, and four of the five weight it below vision whenever the scene alone identifies the goal; under the standard replacement write-back the SAE pooling that preserves behavior is architecture-specific (&pi;0.5 per-token, SmolVLA indifferent); and goal selection and motor generation separate into VLM and expert pathways wherever the two are distinguishable. We release <a href="https://action-atlas.com" target="_blank"><strong>Action Atlas</strong></a>, an interactive platform covering all 520+ trained SAEs, 79 identified concepts, and the scored UR10e rollouts.
           </p>
         </div>
       </div>
@@ -226,7 +226,7 @@
             Sparse Autoencoders (SAEs)
           </h4>
           <p style="color: var(--text-mid); line-height: 1.7;">
-            We train <strong>520+ TopK SAEs</strong> (k=64) across all six models with 4&ndash;8&times; expansion. Each action token is processed independently to preserve temporal structure. Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> (Cohen's d &times; top-k frequency), recovering 79 aligned manipulation concepts.
+            We train <strong>520+ TopK SAEs</strong> (k=64) across the five VLAs with 4&ndash;8&times; expansion. Each action token is processed independently to preserve temporal structure. Feature importance is scored via <strong>frequency-weighted contrastive selection</strong> (Cohen's d &times; top-k frequency), recovering 79 aligned manipulation concepts.
           </p>
         </div>
       </div>
@@ -326,7 +326,7 @@
         <div class="finding-marker">6</div>
         <div>
           <h4>SAE Pooling Preference Is Architecture-Tied, Not Universal</h4>
-          <p>Which pooling preserves rollout fidelity is an architectural property, not a universal VLA property: per-token preserves &pi;0.5 and OpenVLA-OFT, mean-pool suits X-VLA, and SmolVLA is indifferent. Single-feature SAE ablation produces 28&ndash;92% zero-effect rates depending on architecture, and causal sensitivity does not follow representation width.</p>
+          <p>Which pooling preserves rollout fidelity depends on the architecture and on how the reconstruction is written back. Under the standard replacement write-back, per-token reconstruction preserves &pi;0.5 and OpenVLA-OFT and SmolVLA is indifferent, while X-VLA and GR00T tolerate mean-pooling when the reconstruction is written back as a residual. Single-feature SAE ablation produces 28&ndash;92% zero-effect rates depending on architecture, and causal sensitivity does not follow representation width.</p>
         </div>
       </div>
     </div>
@@ -343,7 +343,7 @@
         <div class="figure-container figure-row">
           <img src="./static/images/fig_cross_task_displacement.png" alt="Cross-task displacement override rates">
           <p class="figure-caption">
-            Cross-task injection override rates, tie-band-conditional under action-vector cosine: &pi;0.5 99.6% (n=1,968), X-VLA 99.8% (n=3,150), OpenVLA-OFT 96.4% (n=1,079), GR00T 57.0% (n=270). Tie-band fractions differ sharply across models, so the conditional rates are not directly comparable; tie-inclusive rates per metric are in the paper. Right: SmolVLA pathway split on LIBERO, 78.6% expert vs. 25.6% VLM (n=720).
+            Cross-task injection override per model, tie-band-conditional (solid) and tie-inclusive (hatched). Tie bands differ by model, so only the hatched bars compare across models: &pi;0.5 99.6%, OpenVLA-OFT 77.9%, X-VLA 52.8%, GR00T 6.7%, SmolVLA 52.1%. Right: SmolVLA pathway split on LIBERO, 78.6% expert vs. 25.6% VLM (n=720).
           </p>
         </div>
       </div>
@@ -442,7 +442,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title has-text-centered">Models Studied</h2>
     <p class="has-text-centered" style="color: var(--text-mid); margin-bottom: 2.5rem; margin-top: 1rem;">
-      Five VLAs and one language-free control, 80M to 7B parameters, three action generation paradigms
+      Five VLAs and one language-free control, 80M to 7B parameters, four action generation paradigms
     </p>
 
     <div class="columns is-multiline">
@@ -452,7 +452,7 @@
           <div class="model-icon" style="background: #c0392b;">&#960;</div>
           <div class="model-name">&pi;0.5</div>
           <div class="model-params">3B parameters, cross-task override 99.6% (n=1,968)</div>
-          <div class="model-desc">PaliGemma VLM (SigLIP + Gemma 2.6B) with dedicated Gemma action expert (18L, 1024-dim). Flow matching with 50-step denoising and 50-step action chunking. Dual-pathway: VLM conditions expert.</div>
+          <div class="model-desc">PaliGemma VLM (SigLIP + Gemma 2.6B) with dedicated Gemma action expert (18L, 1024-dim). Flow matching with 50-token action chunks. Dual-pathway: VLM conditions expert.</div>
           <span class="model-badge badge-primary">Flow Matching, Dual Pathway</span>
         </div>
       </div>
@@ -502,7 +502,7 @@
           <div class="model-icon" style="background: #d62828;">X</div>
           <div class="model-name">X-VLA</div>
           <div class="model-params">~1B parameters, cross-task override 52.8% tie-inclusive under end-effector velocity (99.8% tie-conditional, action cosine)</div>
-          <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot). Override is reported under action-vector cosine; an EEF-velocity classifier yields 52.8% (both disclosed in the paper's limitations).</div>
+          <div class="model-desc">Florence-2 VLM with soft-prompted flow-matching action head. Cross-embodiment design tested on LIBERO and SimplerEnv (WidowX + Google Robot). Override is reported under action-vector cosine; an EEF-velocity classifier yields 52.8% (both reported in the paper).</div>
           <span class="model-badge badge-primary">Flow Matching + Soft Prompts</span>
         </div>
       </div>

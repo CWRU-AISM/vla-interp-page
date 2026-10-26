@@ -35,7 +35,7 @@ vla-interp-page/
 ├── index.html        Main project page
 ├── tutorial.html     Setup and tutorial page
 ├── serve.py          Local preview server
-├── paper.pdf         Paper
+├── camera_ready.pdf  Paper (NeurIPS 2026 camera-ready)
 └── static/
     ├── css/          Bulma, FontAwesome, custom styles
     ├── js/           FontAwesome bundle
